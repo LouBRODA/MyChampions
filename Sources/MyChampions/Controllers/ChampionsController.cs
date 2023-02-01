@@ -1,4 +1,5 @@
 ﻿using API_MyChampions.Mapper;
+using DTO_MyChampions;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using StubLib;
@@ -11,6 +12,19 @@ namespace MyChampions.Controllers
     [ApiController]
     public class ChampionsController : ControllerBase
     {
+        private IDataManager dataManager;
+        private StubData stubData;
+
+        public ChampionsController(StubData stubData)
+        {
+            this.stubData = stubData;
+        }
+
+        public void Controller(IDataManager dataManager)
+        {
+            this.dataManager= dataManager;
+        }
+
         // GET: api/<ChampionsController>
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -29,8 +43,9 @@ namespace MyChampions.Controllers
 
         // POST api/<ChampionsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] ChampionDTO champion)
         {
+            return CreatedAtAction(nameof(Get), new { Id = 1 }, await dataManager.ChampionsMgr.AddItem(champion.ToModel().ToDTO()));
         }
 
         // PUT api/<ChampionsController>/5
