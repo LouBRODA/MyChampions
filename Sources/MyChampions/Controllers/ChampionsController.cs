@@ -30,7 +30,7 @@ namespace MyChampions.Controllers
         public async Task<IActionResult> Get()
         {
             StubData stubData = new StubData();
-            var champions = (await stubData.ChampionsMgr.GetItems(0, (await stubData.ChampionsMgr.GetNbItems()))).Select(champion=>champion.toDTO());
+            var champions = (await stubData.ChampionsMgr.GetItems(0, (await stubData.ChampionsMgr.GetNbItems()))).Select(champion=>champion.ToDTO());
             return Ok(champions);
         }
 
@@ -45,7 +45,7 @@ namespace MyChampions.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ChampionDTO champion)
         {
-            return CreatedAtAction(nameof(Get), new { Id = 1 }, await dataManager.ChampionsMgr.AddItem(champion.ToModel().ToDTO()));
+            return CreatedAtAction(nameof(Get), new { Id = 1 }, (await dataManager.ChampionsMgr.AddItem(ChampionMapper.ToModel(champion))).ToDTO());
         }
 
         // PUT api/<ChampionsController>/5

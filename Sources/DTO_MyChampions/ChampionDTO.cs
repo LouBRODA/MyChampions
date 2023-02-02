@@ -1,4 +1,6 @@
-﻿namespace DTO_MyChampions
+﻿using Model;
+
+namespace DTO_MyChampions
 {
     public class ChampionDTO
     {
