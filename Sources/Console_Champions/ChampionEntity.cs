@@ -8,7 +8,11 @@ namespace Console_Champions
 {
     public class ChampionEntity
     {
-        public long id { get; set; }
-        public string? name { get; set; }
+        public long Id { get; set; }
+        public string? Name { get; set; }
+        public ChampClassEntity? Class { get; set; }
+        public string? Icon { get; set; }
+        public string? Image { get; set; }
+        public string? Bio { get; set; }
     }
 }

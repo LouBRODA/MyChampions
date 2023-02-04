@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Console_Champions
 {
-    public class ChampionContext : Microsoft.EntityFrameworkCore.DbContext
+    public class ChampionContext : DbContext
     {
         public DbSet<ChampionEntity> ChampionEntity { get; set; }
 
