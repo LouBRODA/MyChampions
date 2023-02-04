@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleChampions.Migrations
 {
     [DbContext(typeof(ChampionContext))]
-    [Migration("20230201154643_ChampionMigration")]
-    partial class ChampionMigration
+    [Migration("20230204091219_Migration2")]
+    partial class Migration2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,14 +21,26 @@ namespace ConsoleChampions.Migrations
 
             modelBuilder.Entity("Console_Champions.ChampionEntity", b =>
                 {
-                    b.Property<long>("id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Bio")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.Property<int?>("Class")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("ChampionEntity");
                 });

@@ -5,7 +5,7 @@
 namespace ConsoleChampions.Migrations
 {
     /// <inheritdoc />
-    public partial class ChampionMigration : Migration
+    public partial class Migration2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,13 +14,17 @@ namespace ConsoleChampions.Migrations
                 name: "ChampionEntity",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "INTEGER", nullable: false)
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(type: "TEXT", nullable: true)
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Class = table.Column<int>(type: "INTEGER", nullable: true),
+                    Icon = table.Column<string>(type: "TEXT", nullable: true),
+                    Image = table.Column<string>(type: "TEXT", nullable: true),
+                    Bio = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChampionEntity", x => x.id);
+                    table.PrimaryKey("PK_ChampionEntity", x => x.Id);
                 });
         }
 

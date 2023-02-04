@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Console_Champions
         public string? Name { get; set; }
         public ChampClassEntity? Class { get; set; }
         public string? Icon { get; set; }
-        public string? Image { get; set; }
+        public LargeImage? Image { get; set; }
         public string? Bio { get; set; }
     }
 }

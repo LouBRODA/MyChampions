@@ -18,14 +18,26 @@ namespace ConsoleChampions.Migrations
 
             modelBuilder.Entity("Console_Champions.ChampionEntity", b =>
                 {
-                    b.Property<long>("id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Bio")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.Property<int?>("Class")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("ChampionEntity");
                 });

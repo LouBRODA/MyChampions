@@ -4,36 +4,14 @@ using Model;
 using static System.Net.Mime.MediaTypeNames;
 using System.Collections.ObjectModel;
 using System.Reflection.PortableExecutable;
+using StubLib;
 
 Console.WriteLine("Hello, World!");
 
+    StubData stubData = new StubData();
+    var champions = stubData.ChampionsMgr.GetItems(0, await stubData.ChampionsMgr.GetNbItems());
+
 using (var context = new ChampionContext())
 {
-    context.ChampionEntity.AddRange(
-        new ChampionEntity
-        {
-            Name = "Akali",
-            Class = (ChampClassEntity?)1,
-            Icon = "iconAkali",
-            Image = "imageAkali",
-            Bio = "bioAkali",
-},
-        new ChampionEntity
-        {
-            Name = "Aatrox",
-            Class = (ChampClassEntity?)2,
-            Icon = "iconAatrox",
-            Image = "imageAatrox",
-            Bio = "bioAatrox",
-        },
-        new ChampionEntity
-        {
-            Name = "Ahri",
-            Class = (ChampClassEntity?)3,
-            Icon = "iconAhri",
-            Image = "imageAhri",
-            Bio = "bioAhri",
-        }
-    );
     context.SaveChanges();
 }
