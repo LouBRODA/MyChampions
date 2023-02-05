@@ -11,6 +11,12 @@ namespace Console_Champions
 {
     public class ChampionContext : DbContext
     {
+        public ChampionContext() { }
+
+        public ChampionContext(DbContextOptions options) : base(options)
+        {
+        }
+
         public DbSet<ChampionEntity> ChampionEntity { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) { 

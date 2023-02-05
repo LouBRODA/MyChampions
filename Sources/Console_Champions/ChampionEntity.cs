@@ -9,11 +9,20 @@ namespace Console_Champions
 {
     public class ChampionEntity
     {
+
         public long Id { get; set; }
         public string? Name { get; set; }
         public ChampClassEntity? Class { get; set; }
         public string? Icon { get; set; }
         public LargeImage? Image { get; set; }
         public string? Bio { get; set; }
+
+        public ChampionEntity(string? name)
+        {
+            Name = name;
+            //Class = @class;
+        }
+
+        public ChampionEntity() { }
     }
 }
