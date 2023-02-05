@@ -1,6 +1,78 @@
-# prepaLoL
+# **MY CHAMPIONS**
 
-## Diagramme de classes du modèle
+## Bonjour et bienvenue sur le dépôt du projet MyChampions ! 👋
+
+*******
+
+Sommaire 
+ 1. [Accessibilité](#acces)
+ 2. [Progression](#progression)
+ 3. [Présentation du projet](#presentation)
+ 4. [Contenu](#contenu)
+ 5. [Conception](#conception)
+ 6. [Auteur](#auteur)
+
+*******
+
+<div id='acces'/>
+
+### Profiter dès maintenant d'un accès anticipé à MyChampions
+
+> **Warning**: Le déploiement n'a pas encore été fait. 
+
+*******
+<div id='progression'/>
+
+🚧  __EN PROGRESSION__
+
+📆  _Fin du projet prévue :_ Avril 2023
+
+- __TP 1__ (_Consommation et Développement de services_) : Premier Contrôleur `Champion`  
+- __TP 1__ (_Entity Framework_) : Création d'une première classe `Champion`    
+- __TP 2__ (_Consommation et Développement de services_) : Requêtes GET et POST + tests    
+- __TP 2__ (_Entity Framework_) : Ajout de la liaison avec l'énumération `ClassChampion` + lien avec `Stub`    
+
+*******
+
+<div id='presentation'/>
+
+### **Présentation**
+
+MyChampions : votre guide des champions de League Of Legends ! :beginner:     
+
+MyChampions est une application référençant les différents personnages du célèbre jeu de Riot Games : League Of Legends ainsi que les skins ou les runes existantes.   
+
+*******
+
+<div id='contenu'/>
+
+## Fonctionnalités
+
+- Non encore décidées
+
+## Ressources
+
+- Temps
+    - 23 Janvier au Avril    
+- Matériel
+    - Ordinateurs portables sous Windows   
+    - Visual Studio 2022    
+- Langages utilisés
+    - C# ![]( 	https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+    - .NET ![](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
+    - SQLITE ![](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+
+- Personne 
+    - 1 étudiant en BUT Informatique
+
+*******
+
+<div id='conception'/>
+
+## Détails de conception
+
+
+### Diagramme de classes du modèle
 ```mermaid
 classDiagram
 class LargeImage{
@@ -83,7 +155,7 @@ class RunePage{
 RunePage --> "*" Rune : Dictionary~Category,Rune~
 ```
 
-## Diagramme de classes des interfaces de gestion de l'accès aux données
+### Diagramme de classes des interfaces de gestion de l'accès aux données
 ```mermaid
 classDiagram
 direction LR;
@@ -141,7 +213,7 @@ IRunesManager <-- IDataManager : RunesMgr
 IRunePagesManager <-- IDataManager : RunePagesMgr
 ```
 
-## Diagramme de classes simplifié du Stub
+### Diagramme de classes simplifié du Stub
 ```mermaid
 classDiagram
 direction TB;
@@ -166,3 +238,13 @@ StubData --> "*" Rune
 StubData --> "*" RunePages
 StubData --> "*" Skins
 ```
+
+
+*******
+
+<div id='auteur'/>
+
+## Auteur
+
+Étudiant 2ème Annnée - BUT Informatique - IUT Clermont Auvergne - 2022-2023   
+`BRODA Lou`
