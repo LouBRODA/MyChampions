@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,10 @@ namespace Console_Champions
         public string? Name { get; set; }
         public ChampClassEntity? Class { get; set; }
         public string? Icon { get; set; }
-        public LargeImage? Image { get; set; }
+        public string? Image { get; set; }
         public string? Bio { get; set; }
 
-        public ChampionEntity(string? name)
-        {
-            Name = name;
-            //Class = @class;
-        }
-
-        public ChampionEntity() { }
-    }
+        public ICollection<Skin> Skins { get; set; }
+    }   
+    
 }

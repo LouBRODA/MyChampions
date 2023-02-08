@@ -20,10 +20,10 @@ namespace MyChampions.Controllers
             this.stubData = stubData;
         }
 
-        public void Controller(IDataManager dataManager)
+        /*public void Controller(IDataManager dataManager)
         {
             this.dataManager= dataManager;
-        }
+        }*/
 
         // GET: api/<ChampionsController>
         [HttpGet]
@@ -45,7 +45,10 @@ namespace MyChampions.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ChampionDTO champion)
         {
-            return CreatedAtAction(nameof(Get), new { Id = 1 }, (await dataManager.ChampionsMgr.AddItem(ChampionMapper.ToModel(champion))).ToDTO());
+            var championModel = champion.ToModel();
+            var championResult = await dataManager.ChampionsMgr.AddItem(championModel);
+            var championDto = championResult.ToDTO();
+            return CreatedAtAction("Get", new { Id = 1 }, championResult);
         }
 
         // PUT api/<ChampionsController>/5

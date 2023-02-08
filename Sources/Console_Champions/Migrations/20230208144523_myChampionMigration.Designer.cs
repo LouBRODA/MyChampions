@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleChampions.Migrations
 {
     [DbContext(typeof(ChampionContext))]
-    [Migration("20230204091219_Migration2")]
-    partial class Migration2
+    [Migration("20230208144523_myChampionMigration")]
+    partial class myChampionMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

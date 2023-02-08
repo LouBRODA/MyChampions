@@ -17,7 +17,7 @@ namespace Console_Champions.Mapper
                 Class = (ChampClassEntity?)champion.Class,
                 Bio = champion.Bio,
                 Icon = champion.Icon,
-                Image = champion.Image,
+                Image = champion.Image.Base64,
             };
         }
     }
