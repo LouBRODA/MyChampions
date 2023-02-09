@@ -1,0 +1,30 @@
+kind: pipeline
+type: docker
+name: MyChampions
+
+trigger:
+    event:
+      -push
+
+steps:
+# docker image build
+  - name: docker-build-and-push
+    image: plugins/docker
+    settings:
+       dockerfile: Sources/Dockerfile
+       context: Sources/
+       registry: hub.codefirst.iut.uca.fr
+       repo: hub.codefirst.iut.uca.fr/lou.broda/MyChampions
+       username:
+         from_secret: SECRET_REGISTRY_USERNAME
+       password:
+         from_secret: SECRET_REGISTRY_PASSWORD
+
+# container deployment
+  - name: deploy-container
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+        IMAGENAME: hub.codefirst.iut.uca.fr/lou.broda/MyChampions:latest
+        CONTAINERNAME: my_container
+        COMMAND: create
+        OVERWRITE: true
