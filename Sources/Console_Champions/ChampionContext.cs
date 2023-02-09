@@ -39,9 +39,9 @@ namespace Console_Champions
                 .Property<int>("SkinForeignKey");
 
             modelBuilder.Entity<SkinEntity>()
-                .HasOne(s => s.Champion)
-                .WithMany(c => c.Skins)
-                .HasForeignKey("ChampionForeignKey");
+                .HasOne(s => s.Champion);
+                //.WithMany(c => c.Skins)
+                //.HasForeignKey("ChampionForeignKey");
         }
     }
 }

@@ -13,32 +13,27 @@ namespace MyChampions.Controllers
     public class ChampionsController : ControllerBase
     {
         private IDataManager dataManager;
-        private StubData stubData;
 
-        public ChampionsController(StubData stubData)
-        {
-            this.stubData = stubData;
-        }
-
-        /*public void Controller(IDataManager dataManager)
+        public ChampionsController(IDataManager dataManager)
         {
             this.dataManager= dataManager;
-        }*/
+        }
 
         // GET: api/<ChampionsController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            StubData stubData = new StubData();
-            var champions = (await stubData.ChampionsMgr.GetItems(0, (await stubData.ChampionsMgr.GetNbItems()))).Select(champion=>champion.ToDTO());
+            var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion=>champion?.ToDTO());
             return Ok(champions);
         }
 
         // GET api/<ChampionsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetByName(string name)
         {
-            return "value";
+            var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion => champion?.ToDTO());
+            var champName = champions.Where(c => c.Name.Equals(name));
+            return Ok(champName);
         }
 
         // POST api/<ChampionsController>
@@ -48,7 +43,7 @@ namespace MyChampions.Controllers
             var championModel = champion.ToModel();
             var championResult = await dataManager.ChampionsMgr.AddItem(championModel);
             var championDto = championResult.ToDTO();
-            return CreatedAtAction("Get", new { Id = 1 }, championResult);
+            return CreatedAtAction("Get", new { Id = 1 }, championDto);
         }
 
         // PUT api/<ChampionsController>/5
