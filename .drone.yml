@@ -1,3 +1,11 @@
+kind: pipeline
+type: docker
+name: MyChampions
+
+trigger:
+    event:
+      -push
+
 # docker image build
   - name: docker-build-and-push
     image: plugins/docker
