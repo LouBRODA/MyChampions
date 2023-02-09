@@ -6,6 +6,7 @@ trigger:
     event:
       -push
 
+steps:
 # docker image build
   - name: docker-build-and-push
     image: plugins/docker
