@@ -22,9 +22,9 @@ steps:
     
 # container deployment
   - name: deploy-container
-  image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
-  environment:
-      IMAGENAME: hub.codefirst.iut.uca.fr/lou.broda/MyChampions:latest
-      CONTAINERNAME: my_container
-      COMMAND: create
-      OVERWRITE: true
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+    environment:
+        IMAGENAME: hub.codefirst.iut.uca.fr/lou.broda/MyChampions:latest
+        CONTAINERNAME: my_container
+        COMMAND: create
+        OVERWRITE: true
