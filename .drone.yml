@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: MyChampion
+name: default
  
 trigger:
   event:
@@ -31,7 +31,7 @@ steps:
     commands:
       - cd Sources/
       - dotnet restore LeagueOfLegends.sln
-      - dotnet sonarscanner begin /k:test_docker_csharp /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
+      - dotnet sonarscanner begin /k:a /d:sonar.host.url=$${PLUGIN_SONAR_HOST} /d:sonar.coverageReportPaths="coveragereport/SonarQube.xml" /d:sonar.coverage.exclusions="Tests/**" /d:sonar.login=$${PLUGIN_SONAR_TOKEN} 
       - dotnet build LeagueOfLegends.sln -c Release --no-restore
       - dotnet test LeagueOfLegends.sln --logger trx --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect "XPlat Code Coverage"
       - reportgenerator -reports:"**/coverage.cobertura.xml" -reporttypes:SonarQube -targetdir:"coveragereport"
@@ -39,7 +39,7 @@ steps:
       - dotnet sonarscanner end /d:sonar.login=$${PLUGIN_SONAR_TOKEN}
     secrets: [ SECRET_SONAR_LOGIN ]
     settings:
-      # accessible en ligne de commande par ${PLUGIN_SONAR_HOST}
+      # accessible en ligne de commande par ${PLUGIN_SONAR_HOST}    
       sonar_host: https://codefirst.iut.uca.fr/sonar/
       # accessible en ligne de commande par ${PLUGIN_SONAR_TOKEN}
       sonar_token:
