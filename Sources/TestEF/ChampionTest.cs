@@ -12,7 +12,7 @@ namespace TestEF
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
+            //connection.Open();
 
             var options = new DbContextOptionsBuilder<ChampionContext>()
                 .UseSqlite(connection)
@@ -24,9 +24,9 @@ namespace TestEF
                 //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 
-                ChampionEntity akali = new ChampionEntity("Akali");
-                ChampionEntity aatrox = new ChampionEntity("Aatrox");
-                ChampionEntity ahri = new ChampionEntity("Ahri");
+                ChampionEntity akali = new ChampionEntity("Akali","","","");
+                ChampionEntity aatrox = new ChampionEntity("Aatrox", "", "", "");
+                ChampionEntity ahri = new ChampionEntity("Ahri", "", "", "");
 
                 context.ChampionEntity.Add(akali);
                 context.ChampionEntity.Add(aatrox);
@@ -49,7 +49,7 @@ namespace TestEF
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
+            //connection.Open();
 
             var options = new DbContextOptionsBuilder<ChampionContext>()
                 .UseSqlite(connection)
@@ -61,9 +61,9 @@ namespace TestEF
                 //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 
-                ChampionEntity akali = new ChampionEntity("Akali");
-                ChampionEntity aatrox = new ChampionEntity("Aatrox");
-                ChampionEntity ahri = new ChampionEntity("Ahri");
+                ChampionEntity akali = new ChampionEntity("Akali", "", "", "");
+                ChampionEntity aatrox = new ChampionEntity("Aatrox", "", "", "");
+                ChampionEntity ahri = new ChampionEntity("Ahri", "", "", "");
 
                 context.ChampionEntity.Add(akali);
                 context.ChampionEntity.Add(aatrox);

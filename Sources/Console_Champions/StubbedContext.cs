@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Console_Champions
 {
-    internal class StubbedContext
+    public class StubbedContext
     {
     }
 }
