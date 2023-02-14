@@ -24,9 +24,9 @@ namespace TestEF
                 //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 
-                ChampionEntity akali = new ChampionEntity("Akali","","","");
-                ChampionEntity aatrox = new ChampionEntity("Aatrox", "", "", "");
-                ChampionEntity ahri = new ChampionEntity("Ahri", "", "", "");
+                ChampionEntity akali = new ChampionEntity("Akali","iconAkali","imageAkali","bioAkali");
+                ChampionEntity aatrox = new ChampionEntity("Aatrox", "iconAatrox", "imageAatrox", "bioAatrox");
+                ChampionEntity ahri = new ChampionEntity("Ahri", "iconAhri", "imageAhri", "bioAhri");
 
                 context.ChampionEntity.Add(akali);
                 context.ChampionEntity.Add(aatrox);
@@ -61,9 +61,9 @@ namespace TestEF
                 //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 
-                ChampionEntity akali = new ChampionEntity("Akali", "", "", "");
-                ChampionEntity aatrox = new ChampionEntity("Aatrox", "", "", "");
-                ChampionEntity ahri = new ChampionEntity("Ahri", "", "", "");
+                ChampionEntity akali = new ChampionEntity("Akali", "iconAkali", "imageAkali", "bioAkali");
+                ChampionEntity aatrox = new ChampionEntity("Aatrox", "iconAatrox", "imageAatrox", "bioAatrox");
+                ChampionEntity ahri = new ChampionEntity("Ahri", "iconAhri", "imageAhri", "bioAhri");
 
                 context.ChampionEntity.Add(akali);
                 context.ChampionEntity.Add(aatrox);

@@ -28,7 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAPI", "TestAPI\TestAPI.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console_Champions", "Console_Champions\Console_Champions.csproj", "{51A0A028-2B0E-46D4-A871-8B547F57047C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEF", "TestEF\TestEF.csproj", "{F1BE79EE-6D98-42C7-92FB-DAED687FE149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEF", "TestEF\TestEF.csproj", "{F1BE79EE-6D98-42C7-92FB-DAED687FE149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestsAPI", "ConsoleTestsAPI\ConsoleTestsAPI.csproj", "{0EBE2AE9-9E20-4AA2-8467-C1BCB722E826}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,10 @@ Global
 		{F1BE79EE-6D98-42C7-92FB-DAED687FE149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1BE79EE-6D98-42C7-92FB-DAED687FE149}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1BE79EE-6D98-42C7-92FB-DAED687FE149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EBE2AE9-9E20-4AA2-8467-C1BCB722E826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EBE2AE9-9E20-4AA2-8467-C1BCB722E826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EBE2AE9-9E20-4AA2-8467-C1BCB722E826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EBE2AE9-9E20-4AA2-8467-C1BCB722E826}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1889FA6E-B7C6-416E-8628-9449FB9070B9} = {C76D0C23-1FFA-4963-93CD-E12BD643F030}
 		{B01D7EF2-2D64-409A-A29A-61FB7BB7A9DB} = {2C607793-B163-4731-A4D1-AFE8A7C4C170}
+		{0EBE2AE9-9E20-4AA2-8467-C1BCB722E826} = {C76D0C23-1FFA-4963-93CD-E12BD643F030}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92F3083D-793F-4552-8A9A-0AD6534159C9}
