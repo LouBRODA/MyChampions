@@ -27,21 +27,12 @@ namespace Console_Champions
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ChampionEntity>().HasKey(c => c.Id);
-            modelBuilder.Entity<ChampionEntity>().Property(c => c.Id)
-                                           .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<SkinEntity>().HasKey(s => s.Name); //définition de la clé primaire
-            modelBuilder.Entity<SkinEntity>().Property(s => s.Name)
-                                            .ValueGeneratedOnAdd();
+            modelBuilder.Entity<SkinEntity>().Property<int>("ForeignKey");
 
             modelBuilder.Entity<SkinEntity>()
-                .Property<int>("SkinForeignKey");
-
-            modelBuilder.Entity<SkinEntity>()
-                .HasOne(s => s.Champion);
-                //.WithMany(c => c.Skins)
-                //.HasForeignKey("ChampionForeignKey");
+                .HasOne(s => s.Champion)
+                .WithMany(c => c.Skins)
+                .HasForeignKey("ForeignKey");
         }
     }
 }

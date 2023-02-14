@@ -18,7 +18,7 @@ namespace Console_Champions
         public string? Image { get; set; }
         public string? Bio { get; set; }
 
-        public ICollection<Skin> Skins { get; set; }
+        public ICollection<SkinEntity> Skins { get; set; }
 
         public ChampionEntity(string name, string icon, string image, string bio)
         {
