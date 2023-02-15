@@ -5,8 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["API_MyChampions/API_MyChampions.csproj", "API_MyChampions/"]
-COPY ["Console_Champions/Console_Champions.csproj", "Console_Champions/"]
+#COPY ["Console_Champions/Console_Champions.csproj", "Console_Champions/"]
 COPY ["DTO_MyChampions/DTO_MyChampions.csproj", "DTO_MyChampions/"]
 COPY ["Model/Model.csproj", "Model/"]
 COPY ["Shared/Shared.csproj", "Shared/"]
