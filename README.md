@@ -33,8 +33,9 @@ Sommaire
 - __TP 2__ (_Entity Framework_) : Ajout de la liaison avec l'énumération `ClassChampion` + lien avec `Stub`    
 - __TP 3__ (_Consommation et Développement de services_) : Ajustements tests + début mise en place drone.yml    
 - __TP 3__ (_Entity Framework_) : Tests + Création début gestion `Skin`    
-- __Vacances 1__ (_Entity Framework_) : Tentatives correction tests + CI en marche 
-
+- __Vacances 1__ (_EF + Conso Services_) : Tentatives correction tests + CI en marche 
+- __Vacances 2__ (_EF + Conso Services_) : Début tests API Console + début OneToMany 
+- __Vacances 3__ (_EF + Conso Services_) : Container Deployment Fonctionnel 
 
 *******
 
