@@ -12,9 +12,9 @@ COPY ["Shared/Shared.csproj", "Shared/"]
 COPY ["StubLib/StubLib.csproj", "StubLib/"]
 COPY ["TestAPI/TestAPI.csproj", "TestAPI/"]
 COPY ["TestEF/TestEF.csproj", "TestEF/"]
-RUN dotnet restore "API_MyChampions/API_MyChampions.csproj"
+RUN dotnet restore "MyChampions/API_MyChampions.csproj"
 COPY . .
-WORKDIR "/src/API_MyChampions"
+WORKDIR "/src/MyChampions"
 RUN dotnet build "API_MyChampions.csproj" -c Release -o /app/build
 
 FROM build AS publish
