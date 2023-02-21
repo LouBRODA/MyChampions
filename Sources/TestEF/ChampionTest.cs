@@ -23,6 +23,7 @@ namespace TestEF
             {
                 //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
+                context.ChampionEntity.RemoveRange(context.ChampionEntity);
 
                 ChampionEntity akali = new ChampionEntity() { Name="Akali", Icon="iconAkali", Image="imageAkali", Bio="bioAkali" };
                 ChampionEntity aatrox = new ChampionEntity() { Name = "Aatrox", Icon = "iconAatrox", Image = "imageAatrox", Bio = "bioAatrox" };
