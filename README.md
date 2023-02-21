@@ -18,7 +18,7 @@ Sommaire
 
 ### Profiter dès maintenant d'un accès anticipé à MyChampions
 
-> **Warning**: Le déploiement n'a pas encore été fait. 
+> **Warning**: Le déploiement n'a pas encore été fait..
 
 *******
 <div id='progression'/>
