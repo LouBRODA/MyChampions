@@ -24,9 +24,9 @@ namespace TestEF
                 //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 
-                ChampionEntity akali = new ChampionEntity("Akali","iconAkali","imageAkali","bioAkali");
-                ChampionEntity aatrox = new ChampionEntity("Aatrox", "iconAatrox", "imageAatrox", "bioAatrox");
-                ChampionEntity ahri = new ChampionEntity("Ahri", "iconAhri", "imageAhri", "bioAhri");
+                ChampionEntity akali = new ChampionEntity() { Name="Akali", Icon="iconAkali", Image="imageAkali", Bio="bioAkali" };
+                ChampionEntity aatrox = new ChampionEntity() { Name = "Aatrox", Icon = "iconAatrox", Image = "imageAatrox", Bio = "bioAatrox" };
+                ChampionEntity ahri = new ChampionEntity() { Name = "Ahri", Icon = "iconAhri", Image = "imageAhri", Bio = "bioAhri" };
 
                 context.ChampionEntity.Add(akali);
                 context.ChampionEntity.Add(aatrox);
@@ -60,10 +60,11 @@ namespace TestEF
             {
                 //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
+                context.ChampionEntity.RemoveRange(context.ChampionEntity);
 
-                ChampionEntity akali = new ChampionEntity("Akali", "iconAkali", "imageAkali", "bioAkali");
-                ChampionEntity aatrox = new ChampionEntity("Aatrox", "iconAatrox", "imageAatrox", "bioAatrox");
-                ChampionEntity ahri = new ChampionEntity("Ahri", "iconAhri", "imageAhri", "bioAhri");
+                ChampionEntity akali = new ChampionEntity() { Name = "Akali", Icon = "iconAkali", Image = "imageAkali", Bio = "bioAkali" };
+                ChampionEntity aatrox = new ChampionEntity() { Name = "Aatrox", Icon = "iconAatrox", Image = "imageAatrox", Bio = "bioAatrox" };
+                ChampionEntity ahri = new ChampionEntity() { Name = "Ahri", Icon = "iconAhri", Image = "imageAhri", Bio = "bioAhri" };
 
                 context.ChampionEntity.Add(akali);
                 context.ChampionEntity.Add(aatrox);

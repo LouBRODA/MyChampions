@@ -9,14 +9,9 @@ namespace Console_Champions.Mapper
 {
     public static class ChampionMapper
     {
-        private static string name;
-        private static string icon;
-        private static string image;
-        private static string bio;
-
         public static ChampionEntity ToEntity(this Champion champion)
         {
-            return new ChampionEntity(name, icon, image, bio)
+            return new ChampionEntity
             {
                 Name = champion.Name,
                 Class = (ChampClassEntity?)champion.Class,

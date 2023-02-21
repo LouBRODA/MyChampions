@@ -22,8 +22,8 @@ namespace Console_Champions
             options.UseSqlite($"DataSource = Console_Champion.ChampionsDB.db");
         }
 
-        public DbSet<Champion> Champions { get; set; }
-        public DbSet<Skin> Skins { get; set; }
+        //public DbSet<Champion> Champions { get; set; }
+        //public DbSet<Skin> Skins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
