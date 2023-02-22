@@ -17,22 +17,27 @@ namespace Console_Champions
 
         public DbSet<ChampionEntity> ChampionEntity { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options) { 
+        /*protected override void OnConfiguring(DbContextOptionsBuilder options) { 
             base.OnConfiguring(options);
             options.UseSqlite($"DataSource = Console_Champion.ChampionsDB.db");
-        }
+        }*/
 
-        //public DbSet<Champion> Champions { get; set; }
-        //public DbSet<Skin> Skins { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            if (!options.IsConfigured)
+            {
+                options.UseSqlite($"DataSource = Console_Champion.ChampionsDB.db");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SkinEntity>().Property<int>("ForeignKey");
+            modelBuilder.Entity<SkinEntity>().Property<int>("ForeignChampion");
 
             modelBuilder.Entity<SkinEntity>()
                 .HasOne(s => s.Champion)
                 .WithMany(c => c.Skins)
-                .HasForeignKey("ForeignKey");
+                .HasForeignKey("ForeignChampion");
         }
     }
 }

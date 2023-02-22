@@ -12,18 +12,16 @@ namespace TestEF
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
-            //connection.Open();
 
             var options = new DbContextOptionsBuilder<ChampionContext>()
-                .UseSqlite(connection)
+                .UseInMemoryDatabase(databaseName: "Add_Test_database")
                 .Options;
 
             //prepares the database with one instance of the context
             using (var context = new ChampionContext(options))
             {
-                //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
-                context.ChampionEntity.RemoveRange(context.ChampionEntity);
+                //context.ChampionEntity.RemoveRange(context.ChampionEntity);
 
                 ChampionEntity akali = new ChampionEntity() { Name="Akali", Icon="iconAkali", Image="imageAkali", Bio="bioAkali" };
                 ChampionEntity aatrox = new ChampionEntity() { Name = "Aatrox", Icon = "iconAatrox", Image = "imageAatrox", Bio = "bioAatrox" };
@@ -50,18 +48,16 @@ namespace TestEF
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
-            //connection.Open();
 
             var options = new DbContextOptionsBuilder<ChampionContext>()
-                .UseSqlite(connection)
+                .UseInMemoryDatabase(databaseName: "Add_Modify_database")
                 .Options;
 
             //prepares the database with one instance of the context
             using (var context = new ChampionContext(options))
             {
-                //context.Database.OpenConnection();
                 context.Database.EnsureCreated();
-                context.ChampionEntity.RemoveRange(context.ChampionEntity);
+                //context.ChampionEntity.RemoveRange(context.ChampionEntity);
 
                 ChampionEntity akali = new ChampionEntity() { Name = "Akali", Icon = "iconAkali", Image = "imageAkali", Bio = "bioAkali" };
                 ChampionEntity aatrox = new ChampionEntity() { Name = "Aatrox", Icon = "iconAatrox", Image = "imageAatrox", Bio = "bioAatrox" };
