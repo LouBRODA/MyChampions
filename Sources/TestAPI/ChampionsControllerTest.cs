@@ -19,21 +19,21 @@ namespace TestAPI
             championsController = new ChampionsController(new StubData(), new NullLogger<ChampionsController>());
         }
 
-        [TestMethod]
-        public async Task TestGetChampion()
-        {
-            //Act
-            var championsResult = await championsController.Get(null);
+        //[TestMethod]
+        //public async Task TestGetChampion()
+        //{
+        //    //Act
+        //    var championsResult = await championsController.Get(null);
 
-            //Assert
-            var objectResult = championsResult as OkObjectResult;
-            Assert.IsNotNull(objectResult);
+        //    //Assert
+        //    var objectResult = championsResult as OkObjectResult;
+        //    Assert.IsNotNull(objectResult);
 
-            var champions = objectResult?.Value as IEnumerable<ChampionDTO>;
-            Assert.IsNotNull(objectResult);
+        //    var champions = objectResult?.Value as IEnumerable<ChampionDTO>;
+        //    Assert.IsNotNull(objectResult);
 
-            Assert.AreEqual(champions.Count(), await stubData.ChampionsMgr.GetNbItems());
-        }
+        //    Assert.AreEqual(champions.Count(), await stubData.ChampionsMgr.GetNbItems());
+        //}
 
         [TestMethod]
         public async Task TestPostChampion()

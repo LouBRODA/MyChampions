@@ -26,11 +26,12 @@ namespace MyChampions.Controllers
 
         // GET: api/<ChampionsController>
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] PageRequest? pageRequest)
+        public async Task<IActionResult> Get([FromQuery] PageRequest pageRequest, [FromQuery] string? name = "")
         {
-            //var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion=>champion?.ToDTO());
 
             //_logger.LogInformation(_keyConfig.Value.Key);
+
+            IEnumerable<ChampionDTO> dtos = new List<ChampionDTO>();
 
             if(pageRequest.Count > 50)
             {
@@ -41,13 +42,24 @@ namespace MyChampions.Controllers
 
             _logger.LogInformation("Method Get call");
 
-            var dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Select(champion => champion?.ToDTO());
-
+            if (name != "")
+            {
+                if (pageRequest is null)
+                {
+                    dtos = (await dataManager.ChampionsMgr.GetItems(0,int.MaxValue)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
+                }
+                dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
+            }
+            else
+            {
+                dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Select(champion => champion?.ToDTO());
+            }
+          
             var page = new ChampionPageDto()
             {
                 Data = dtos,
-                Count = pageRequest.Index,
-                Index = pageRequest.Count,
+                Index = pageRequest.Index,
+                Count = pageRequest.Count,
                 TotalCount = total,
             };
 
