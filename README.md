@@ -35,7 +35,9 @@ Sommaire
 - __TP 3__ (_Entity Framework_) : Tests + Création début gestion `Skin`    
 - __Vacances 1__ (_EF + Conso Services_) : Tentatives correction tests + CI en marche 
 - __Vacances 2__ (_EF + Conso Services_) : Début tests API Console + début OneToMany 
-- __Vacances 3__ (_EF + Conso Services_) : Container Deployment Fonctionnel 
+- __Vacances 3__ (_EF + Conso Services_) : Container Deployment Fonctionnel     
+- __TP 4__ (_Consommation et Développement de services_) : Travail sur Pagination et Filtrage Méthode `GET`      
+- __TP 4__ (_Entity Framework_) : Créations Entity + OneToMany Fonctionnel avec tests OK         
 
 *******
 
