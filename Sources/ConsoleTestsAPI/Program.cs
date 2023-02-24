@@ -103,7 +103,7 @@ namespace ConsoleTestsAPI
             switch (input)
             {
                 case 0:
-                    var champions = await championsController.Get();
+                    var champions = await championsController.Get(null);
                     break;
                 case 2:
                     string name = ReadLine();
