@@ -1,5 +1,7 @@
 using DTO_MyChampions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using MyChampions.Controllers;
 using StubLib;
 
@@ -14,14 +16,14 @@ namespace TestAPI
         public ChampionsControllerTest()
         {
             stubData = new StubData();
-            championsController = new ChampionsController(new StubData());
+            championsController = new ChampionsController(new StubData(), new NullLogger<ChampionsController>());
         }
 
         [TestMethod]
         public async Task TestGetChampion()
         {
             //Act
-            var championsResult = await championsController.Get();
+            var championsResult = await championsController.Get(null);
 
             //Assert
             var objectResult = championsResult as OkObjectResult;
