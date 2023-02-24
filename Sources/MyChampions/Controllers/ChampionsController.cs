@@ -1,6 +1,8 @@
-﻿using API_MyChampions.Mapper;
+﻿using API_MyChampions;
+using API_MyChampions.Mapper;
 using DTO_MyChampions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Model;
 using StubLib;
 
@@ -13,19 +15,44 @@ namespace MyChampions.Controllers
     public class ChampionsController : ControllerBase
     {
         private IDataManager dataManager;
+        private readonly ILogger<ChampionsController> _logger;
+        //private readonly IOptions<KeyConfig> _keyConfig;
 
-        public ChampionsController(IDataManager dataManager)
+        public ChampionsController(IDataManager dataManager, ILogger<ChampionsController> logger)
         {
             this.dataManager= dataManager;
+            _logger = logger;
         }
 
         // GET: api/<ChampionsController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PageRequest? pageRequest)
         {
-            var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion=>champion?.ToDTO());
-            return Ok(champions);
-        }
+            //var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion=>champion?.ToDTO());
+
+            //_logger.LogInformation(_keyConfig.Value.Key);
+
+            if(pageRequest.Count > 50)
+            {
+                _logger.LogWarning("ERR : Count superior to the limit !");
+            }
+
+            int total = await dataManager.ChampionsMgr.GetNbItems();
+
+            _logger.LogInformation("Method Get call");
+
+            var dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Select(champion => champion?.ToDTO());
+
+            var page = new ChampionPageDto()
+            {
+                Data = dtos,
+                Count = pageRequest.Index,
+                Index = pageRequest.Count,
+                TotalCount = total,
+            };
+
+            return Ok(page);
+        }   
 
         // GET api/<ChampionsController>/5
         [HttpGet("{name}")]
