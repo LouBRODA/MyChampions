@@ -7,7 +7,7 @@
 namespace ConsoleChampions.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationOTM : Migration
+    public partial class myMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,6 +27,42 @@ namespace ConsoleChampions.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ChampionEntity", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RuneEntity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Family = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RuneEntity", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SkillEntity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Type = table.Column<int>(type: "INTEGER", nullable: true),
+                    ChampionEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SkillEntity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SkillEntity_ChampionEntity_ChampionEntityId",
+                        column: x => x.ChampionEntityId,
+                        principalTable: "ChampionEntity",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -64,6 +100,29 @@ namespace ConsoleChampions.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "RuneEntity",
+                columns: new[] { "Id", "Description", "Family", "Name" },
+                values: new object[,]
+                {
+                    { 1, null, null, "Conqueror" },
+                    { 2, null, null, "Triumph" },
+                    { 3, null, null, "Legend: Alacrity" },
+                    { 4, null, null, "Legend: Tenacity" },
+                    { 5, null, null, "last stand" },
+                    { 6, null, null, "last stand 2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SkillEntity",
+                columns: new[] { "Id", "ChampionEntityId", "Description", "Name", "Type" },
+                values: new object[,]
+                {
+                    { 1, null, null, "FirePower", 1 },
+                    { 2, null, null, "MentalStrenght", 2 },
+                    { 3, null, null, "UltimEnd", 3 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "SkinEntity",
                 columns: new[] { "Id", "Description", "ForeignChampion", "Icon", "Image", "Name", "Price" },
                 values: new object[,]
@@ -80,6 +139,11 @@ namespace ConsoleChampions.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_SkillEntity_ChampionEntityId",
+                table: "SkillEntity",
+                column: "ChampionEntityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SkinEntity_ForeignChampion",
                 table: "SkinEntity",
                 column: "ForeignChampion");
@@ -88,6 +152,12 @@ namespace ConsoleChampions.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "RuneEntity");
+
+            migrationBuilder.DropTable(
+                name: "SkillEntity");
+
             migrationBuilder.DropTable(
                 name: "SkinEntity");
 

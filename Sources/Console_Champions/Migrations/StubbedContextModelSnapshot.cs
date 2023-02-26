@@ -63,6 +63,103 @@ namespace ConsoleChampions.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Console_Champions.RuneEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Family")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RuneEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Conqueror"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Triumph"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Legend: Alacrity"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Legend: Tenacity"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "last stand"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "last stand 2"
+                        });
+                });
+
+            modelBuilder.Entity("Console_Champions.SkillEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ChampionEntityId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChampionEntityId");
+
+                    b.ToTable("SkillEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "FirePower",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "MentalStrenght",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "UltimEnd",
+                            Type = 3
+                        });
+                });
+
             modelBuilder.Entity("Console_Champions.SkinEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -150,6 +247,13 @@ namespace ConsoleChampions.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Console_Champions.SkillEntity", b =>
+                {
+                    b.HasOne("Console_Champions.ChampionEntity", null)
+                        .WithMany("Skills")
+                        .HasForeignKey("ChampionEntityId");
+                });
+
             modelBuilder.Entity("Console_Champions.SkinEntity", b =>
                 {
                     b.HasOne("Console_Champions.ChampionEntity", "Champion")
@@ -163,6 +267,8 @@ namespace ConsoleChampions.Migrations
 
             modelBuilder.Entity("Console_Champions.ChampionEntity", b =>
                 {
+                    b.Navigation("Skills");
+
                     b.Navigation("Skins");
                 });
 #pragma warning restore 612, 618
