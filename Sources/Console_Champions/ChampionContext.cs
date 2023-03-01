@@ -11,9 +11,10 @@ namespace Console_Champions
 {
     public class ChampionContext : DbContext
     {
-        public ChampionContext() { }
 
         public ChampionContext(DbContextOptions options) : base(options) { }
+
+        public ChampionContext() { }
 
         public DbSet<ChampionEntity> ChampionEntity { get; set; }
 
@@ -38,6 +39,10 @@ namespace Console_Champions
                 .HasOne(s => s.Champion)
                 .WithMany(c => c.Skins)
                 .HasForeignKey("ForeignChampion");
+
+            modelBuilder.Entity<SkillEntity>()
+                .HasMany<ChampionEntity>(s => s.Champions)
+                .WithMany(c => c.Skills);
         }
     }
 }

@@ -10,14 +10,19 @@ namespace Console_Champions
 {
     public class SkinContext : DbContext
     {
-        public SkinContext() { }
+        public SkinContext(DbContextOptions options) : base(options) { }
+
+        public SkinContext() { }    
 
         public DbSet<SkinEntity> SkinEntity { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            base.OnConfiguring(options);
-            options.UseSqlite($"DataSource = Console_Champion.ChampionsDB.db");
+            if (!options.IsConfigured)
+            {
+                options.UseSqlite($"DataSource = Console_Champion.ChampionsDB.db");
+            }
         }
     }
 }

@@ -14,9 +14,9 @@ namespace Console_Champions
         {
             base.OnModelCreating(modelBuilder);
 
-            ChampionEntity akali = new ChampionEntity { Id = 1, Name = "Akali", Class = (ChampClassEntity?)ChampionClass.Assassin };
-            ChampionEntity aatrox = new ChampionEntity { Id = 2, Name = "Aatrox", Class = (ChampClassEntity?)ChampionClass.Fighter };
-            ChampionEntity ahri = new ChampionEntity { Id = 3, Name = "Ahri", Class = (ChampClassEntity?)ChampionClass.Mage };
+            ChampionEntity akali = new ChampionEntity { Id = 1, Name = "Akali", Class = ChampClassEntity.Assassin };
+            ChampionEntity aatrox = new ChampionEntity { Id = 2, Name = "Aatrox", Class = ChampClassEntity.Fighter };
+            ChampionEntity ahri = new ChampionEntity { Id = 3, Name = "Ahri", Class = ChampClassEntity.Mage };
 
             modelBuilder.Entity<ChampionEntity>().HasData(akali, aatrox, ahri);
 
@@ -29,7 +29,27 @@ namespace Console_Champions
                                     new { Id = 7, ForeignChampion = 3, Name = "Dynasty" },
                                     new { Id = 8, ForeignChampion = 3, Name = "Midnight" },
                                     new { Id = 9, ForeignChampion = 3, Name = "Foxfire" }
-                                    );
+                );
+
+            modelBuilder.Entity<SkillEntity>().HasData(new { Id = 1, Name = "FirePower", Type = SkillTypeEntity.Basic },
+                                    new { Id = 2, Name = "MentalStrenght", Type = SkillTypeEntity.Passive },
+                                    new { Id = 3, Name = "UltimEnd", Type = SkillTypeEntity.Ultimate }
+                );
+
+            modelBuilder.Entity<RuneEntity>().HasData(new { Id = 1, Name = "Conqueror", Type = RuneFamilyEntity.Precision },
+                                    new { Id = 2, Name = "Triumph", Type = RuneFamilyEntity.Precision },
+                                    new { Id = 3, Name = "Legend: Alacrity", Type = RuneFamilyEntity.Precision },
+                                    new { Id = 4, Name = "Legend: Tenacity", Type = RuneFamilyEntity.Precision },
+                                    new { Id = 5, Name = "last stand", Type = RuneFamilyEntity.Domination },
+                                    new { Id = 6, Name = "last stand 2", Type = RuneFamilyEntity.Domination }
+                );
+
+
+            RunePageEntity runePage1 = new RunePageEntity { Id = 1, Name = "RunePage1" };
+            RunePageEntity runePage2 = new RunePageEntity { Id = 2, Name = "RunePage2" };
+
+            modelBuilder.Entity<RunePageEntity>().HasData(runePage1, runePage2);
+
         }
     }
 }

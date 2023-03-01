@@ -13,5 +13,6 @@ namespace Console_Champions
         public string? Name { get; set; }
         public string? Description { get; set; }
         public SkillTypeEntity? Type { get; set; }
+        public ICollection<ChampionEntity>? Champions { get; set; }
     }
 }
