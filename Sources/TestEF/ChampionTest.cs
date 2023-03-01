@@ -47,8 +47,8 @@ namespace TestEF
             }
         }
 
-        [Fact]
-        /*public void GetList_Champion_Test()
+        /*[Fact]
+        public void GetList_Champion_Test()
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");

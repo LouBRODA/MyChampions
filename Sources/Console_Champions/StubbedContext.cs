@@ -44,6 +44,12 @@ namespace Console_Champions
                                     new { Id = 6, Name = "last stand 2", Type = RuneFamilyEntity.Domination }
                 );
 
+
+            RunePageEntity runePage1 = new RunePageEntity { Id = 1, Name = "RunePage1" };
+            RunePageEntity runePage2 = new RunePageEntity { Id = 2, Name = "RunePage2" };
+
+            modelBuilder.Entity<RunePageEntity>().HasData(runePage1, runePage2);
+
         }
     }
 }

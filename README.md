@@ -1,3 +1,5 @@
+![](images_README/mychampions_wallpaper.png)
+
 # **MY CHAMPIONS**
 
 ## Bonjour et bienvenue sur le dépôt du projet MyChampions ! 👋
