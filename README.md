@@ -40,6 +40,8 @@ Sommaire
 - __Vacances 3__ (_EF + Conso Services_) : Container Deployment Fonctionnel     
 - __TP 4__ (_Consommation et Développement de services_) : Travail sur Pagination et Filtrage Méthode `GET`      
 - __TP 4__ (_Entity Framework_) : Créations Entity + OneToMany Fonctionnel avec tests OK         
+- __TP 5__ (_Entity Framework_) : Ajouts de tests pour `Champion` et tests pour `Skin` - Réflexion de l'implémentation des `Skill` et de l'ensemble des `Runes``- Début ManyToMany          
+
 
 *******
 
