@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IDataManager, StubData>();
+builder.Services.AddSingleton<IDataManager, StubData>(); //AddScoped après
 
 var app = builder.Build();
 

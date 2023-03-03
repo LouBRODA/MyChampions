@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Model;
 using StubLib;
+using System.Xml.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -70,31 +71,69 @@ namespace MyChampions.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> GetByName(string name)
         {
-            var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion => champion?.ToDTO());
-            var champName = champions.Where(c => c.Name.Equals(name));
-            return Ok(champName);
+            _logger.LogInformation($"Method GetByName called with {name}");
+            try
+            {
+                var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion => champion?.ToDTO());
+                var champName = champions.Where(c => c.Name.Equals(name));
+                return Ok(champName);
+            }
+            catch
+            {
+                return BadRequest($"ERR : Method GetByName with {name} !");
+            }
         }
 
         // POST api/<ChampionsController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ChampionDTO champion)
         {
-            var championModel = champion.ToModel();
-            var championResult = await dataManager.ChampionsMgr.AddItem(championModel);
-            var championDto = championResult.ToDTO();
-            return CreatedAtAction("Get", new { Id = 1 }, championDto);
+            _logger.LogInformation($"Method Post called with {champion}");
+            try
+            {
+                var championModel = champion.ToModel();
+                var championResult = await dataManager.ChampionsMgr.AddItem(championModel);
+                var championDto = championResult.ToDTO();
+                return CreatedAtAction("Get", new { Id = 1 }, championDto);
+            }
+            catch
+            {
+                return BadRequest($"ERR : Method Post with {champion} !");
+            }
         }
 
         // PUT api/<ChampionsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{name}")]
+        public async Task<IActionResult> Put(string name, [FromBody] ChampionDTO champion)
         {
+            _logger.LogInformation($"Method Put called with {name} and {champion}");
+            try
+            {
+                var championDto = await dataManager.ChampionsMgr.GetItemsByName(name, 0, await dataManager.ChampionsMgr.GetNbItems());
+                await dataManager.ChampionsMgr.UpdateItem(championDto.First(), champion.ToModel());
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest($"ERR : Method Put with {name} and {champion} !");
+            }
         }
 
         // DELETE api/<ChampionsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> Delete(string name)
         {
+            _logger.LogInformation($"Method Delete called with {name}");
+            try
+            {
+                var champ = (await dataManager.ChampionsMgr.GetItemsByName(name, 0, 1)).First();
+                dataManager.ChampionsMgr.DeleteItem(champ);
+                return Ok(champ.ToDTO());
+            }
+            catch
+            {
+                return BadRequest($"ERR : Method Delete with {name} !");
+            }
         }
     }
 }
