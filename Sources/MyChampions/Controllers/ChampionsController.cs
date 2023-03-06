@@ -36,35 +36,45 @@ namespace MyChampions.Controllers
 
             if(pageRequest.Count > 50)
             {
-                _logger.LogWarning("ERR : Count superior to the limit !");
+                _logger.LogWarning($"ERR : Count superior to the limit with {pageRequest} !");
             }
 
             int total = await dataManager.ChampionsMgr.GetNbItems();
+            
+            _logger.LogInformation($"Method Get called with {pageRequest} and {name}");
 
-            _logger.LogInformation("Method Get call");
-
-            if (name != "")
+            try
             {
-                if (pageRequest is null)
+                if (name != "")
                 {
-                    dtos = (await dataManager.ChampionsMgr.GetItems(0,int.MaxValue)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
+                    if (pageRequest is null)
+                    {
+                        dtos = (await dataManager.ChampionsMgr.GetItems(0,int.MaxValue)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
+                    }
+                    dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
                 }
-                dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
-            }
-            else
-            {
-                dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Select(champion => champion?.ToDTO());
-            }
+                else
+                {
+                    dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Select(champion => champion?.ToDTO());
+                }
           
-            var page = new ChampionPageDto()
-            {
-                Data = dtos,
-                Index = pageRequest.Index,
-                Count = pageRequest.Count,
-                TotalCount = total,
-            };
+                var page = new ChampionPageDto()
+                {
+                    Data = dtos,
+                    Index = pageRequest.Index,
+                    Count = pageRequest.Count,
+                    TotalCount = total,
+                };
 
-            return Ok(page);
+                return Ok(page);
+            }
+            catch (Exception exception)
+            { 
+                _logger.LogWarning($"ERR : Method Get with {pageRequest} and {name} !");
+                return BadRequest(exception); 
+            }
+
+
         }   
 
         // GET api/<ChampionsController>/5
@@ -78,9 +88,10 @@ namespace MyChampions.Controllers
                 var champName = champions.Where(c => c.Name.Equals(name));
                 return Ok(champName);
             }
-            catch
+            catch (Exception exception)
             {
-                return BadRequest($"ERR : Method GetByName with {name} !");
+                _logger.LogWarning($"ERR : Method GetByName with {name} !");
+                return BadRequest(exception);
             }
         }
 
@@ -96,9 +107,10 @@ namespace MyChampions.Controllers
                 var championDto = championResult.ToDTO();
                 return CreatedAtAction("Get", new { Id = 1 }, championDto);
             }
-            catch
+            catch (Exception exception)
             {
-                return BadRequest($"ERR : Method Post with {champion} !");
+                _logger.LogWarning($"ERR : Method Post with {champion} !");
+                return BadRequest(exception);
             }
         }
 
@@ -113,9 +125,10 @@ namespace MyChampions.Controllers
                 await dataManager.ChampionsMgr.UpdateItem(championDto.First(), champion.ToModel());
                 return Ok();
             }
-            catch
+            catch (Exception exception)
             {
-                return BadRequest($"ERR : Method Put with {name} and {champion} !");
+                _logger.LogWarning($"ERR : Method Put with {name} and {champion} !");
+                return BadRequest(exception);
             }
         }
 
@@ -126,13 +139,14 @@ namespace MyChampions.Controllers
             _logger.LogInformation($"Method Delete called with {name}");
             try
             {
-                var champ = (await dataManager.ChampionsMgr.GetItemsByName(name, 0, 1)).First();
-                dataManager.ChampionsMgr.DeleteItem(champ);
-                return Ok(champ.ToDTO());
+                var champion = (await dataManager.ChampionsMgr.GetItemsByName(name, 0, 1)).First();
+                dataManager.ChampionsMgr.DeleteItem(champion);
+                return Ok(champion.ToDTO());
             }
-            catch
+            catch (Exception exception)
             {
-                return BadRequest($"ERR : Method Delete with {name} !");
+                _logger.LogWarning($"ERR : Method Delete with {name} !");
+                return BadRequest(exception);
             }
         }
     }
