@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Model;
 using StubLib;
+using System.Xml.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,6 +26,7 @@ namespace MyChampions.Controllers
         }
 
         // GET: api/<ChampionsController>
+        [ApiVersion("1.0")]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PageRequest pageRequest, [FromQuery] string? name = "")
         {
@@ -35,66 +37,122 @@ namespace MyChampions.Controllers
 
             if(pageRequest.Count > 50)
             {
-                _logger.LogWarning("ERR : Count superior to the limit !");
+                _logger.LogWarning($"ERR : Count superior to the limit with {pageRequest} !");
             }
 
             int total = await dataManager.ChampionsMgr.GetNbItems();
+            
+            _logger.LogInformation($"Method Get called with {pageRequest} and {name}");
 
-            _logger.LogInformation("Method Get call");
-
-            if (name != "")
+            try
             {
-                if (pageRequest is null)
+                if (name != "")
                 {
-                    dtos = (await dataManager.ChampionsMgr.GetItems(0,int.MaxValue)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
+                    if (pageRequest is null)
+                    {
+                        dtos = (await dataManager.ChampionsMgr.GetItems(0,int.MaxValue)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
+                    }
+                    dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
                 }
-                dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Where(champion => champion.Name.Contains(name)).Select(champion => champion?.ToDTO());
-            }
-            else
-            {
-                dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Select(champion => champion?.ToDTO());
-            }
+                else
+                {
+                    dtos = (await dataManager.ChampionsMgr.GetItems(pageRequest.Index, pageRequest.Count)).Select(champion => champion?.ToDTO());
+                }
           
-            var page = new ChampionPageDto()
-            {
-                Data = dtos,
-                Index = pageRequest.Index,
-                Count = pageRequest.Count,
-                TotalCount = total,
-            };
+                var page = new ChampionPageDto()
+                {
+                    Data = dtos,
+                    Index = pageRequest.Index,
+                    Count = pageRequest.Count,
+                    TotalCount = total,
+                };
 
-            return Ok(page);
-        }   
+                return Ok(page);
+            }
+            catch (Exception exception)
+            { 
+                _logger.LogWarning($"ERR : Method Get with {pageRequest} and {name} !");
+                return BadRequest(exception); 
+            }
+
+
+        }
 
         // GET api/<ChampionsController>/5
+        [ApiVersion("1.0")]
         [HttpGet("{name}")]
         public async Task<IActionResult> GetByName(string name)
         {
-            var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion => champion?.ToDTO());
-            var champName = champions.Where(c => c.Name.Equals(name));
-            return Ok(champName);
+            _logger.LogInformation($"Method GetByName called with {name}");
+            try
+            {
+                var champions = (await dataManager.ChampionsMgr.GetItems(0, (await dataManager.ChampionsMgr.GetNbItems()))).Select(champion => champion?.ToDTO());
+                var champName = champions.Where(c => c.Name.Equals(name));
+                return Ok(champName);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogWarning($"ERR : Method GetByName with {name} !");
+                return BadRequest(exception);
+            }
         }
 
         // POST api/<ChampionsController>
+        [ApiVersion("1.0")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ChampionDTO champion)
         {
-            var championModel = champion.ToModel();
-            var championResult = await dataManager.ChampionsMgr.AddItem(championModel);
-            var championDto = championResult.ToDTO();
-            return CreatedAtAction("Get", new { Id = 1 }, championDto);
+            _logger.LogInformation($"Method Post called with {champion}");
+            try
+            {
+                var championModel = champion.ToModel();
+                var championResult = await dataManager.ChampionsMgr.AddItem(championModel);
+                var championDto = championResult.ToDTO();
+                return CreatedAtAction("Get", new { Id = 1 }, championDto);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogWarning($"ERR : Method Post with {champion} !");
+                return BadRequest(exception);
+            }
         }
 
         // PUT api/<ChampionsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ApiVersion("1.0")]
+        [HttpPut("{name}")]
+        public async Task<IActionResult> Put(string name, [FromBody] ChampionDTO champion)
         {
+            _logger.LogInformation($"Method Put called with {name} and {champion}");
+            try
+            {
+                var championDto = await dataManager.ChampionsMgr.GetItemsByName(name, 0, await dataManager.ChampionsMgr.GetNbItems());
+                await dataManager.ChampionsMgr.UpdateItem(championDto.First(), champion.ToModel());
+                return Ok();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogWarning($"ERR : Method Put with {name} and {champion} !");
+                return BadRequest(exception);
+            }
         }
 
         // DELETE api/<ChampionsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ApiVersion("1.0")]
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> Delete(string name)
         {
+            _logger.LogInformation($"Method Delete called with {name}");
+            try
+            {
+                var champion = (await dataManager.ChampionsMgr.GetItemsByName(name, 0, 1)).First();
+                dataManager.ChampionsMgr.DeleteItem(champion);
+                return Ok(champion.ToDTO());
+            }
+            catch (Exception exception)
+            {
+                _logger.LogWarning($"ERR : Method Delete with {name} !");
+                return BadRequest(exception);
+            }
         }
     }
 }
