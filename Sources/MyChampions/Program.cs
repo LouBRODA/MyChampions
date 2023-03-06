@@ -1,5 +1,6 @@
 using Model;
 using StubLib;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IDataManager, StubData>(); //AddScoped après
+
+builder.Services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
 
 var app = builder.Build();
 

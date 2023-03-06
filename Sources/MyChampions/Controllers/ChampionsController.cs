@@ -26,6 +26,7 @@ namespace MyChampions.Controllers
         }
 
         // GET: api/<ChampionsController>
+        [ApiVersion("1.0")]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PageRequest pageRequest, [FromQuery] string? name = "")
         {
@@ -75,9 +76,10 @@ namespace MyChampions.Controllers
             }
 
 
-        }   
+        }
 
         // GET api/<ChampionsController>/5
+        [ApiVersion("1.0")]
         [HttpGet("{name}")]
         public async Task<IActionResult> GetByName(string name)
         {
@@ -96,6 +98,7 @@ namespace MyChampions.Controllers
         }
 
         // POST api/<ChampionsController>
+        [ApiVersion("1.0")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ChampionDTO champion)
         {
@@ -115,6 +118,7 @@ namespace MyChampions.Controllers
         }
 
         // PUT api/<ChampionsController>/5
+        [ApiVersion("1.0")]
         [HttpPut("{name}")]
         public async Task<IActionResult> Put(string name, [FromBody] ChampionDTO champion)
         {
@@ -133,6 +137,7 @@ namespace MyChampions.Controllers
         }
 
         // DELETE api/<ChampionsController>/5
+        [ApiVersion("1.0")]
         [HttpDelete("{name}")]
         public async Task<IActionResult> Delete(string name)
         {
