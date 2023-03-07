@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace MyChampions.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class ChampionsController : ControllerBase
     {
@@ -71,8 +71,8 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             { 
-                _logger.LogWarning($"ERR : Method Get with {pageRequest} and {name} !");
-                return BadRequest(exception); 
+                _logger.LogError($"ERR : Method Get with {pageRequest} and {name} !");
+                return StatusCode(500,exception); 
             }
 
 
@@ -92,8 +92,8 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogWarning($"ERR : Method GetByName with {name} !");
-                return BadRequest(exception);
+                _logger.LogError($"ERR : Method GetByName with {name} !");
+                return StatusCode(500,exception);
             }
         }
 
@@ -112,8 +112,8 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogWarning($"ERR : Method Post with {champion} !");
-                return BadRequest(exception);
+                _logger.LogError($"ERR : Method Post with {champion} !");
+                return StatusCode(500,exception);
             }
         }
 
@@ -131,8 +131,8 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogWarning($"ERR : Method Put with {name} and {champion} !");
-                return BadRequest(exception);
+                _logger.LogError($"ERR : Method Put with {name} and {champion} !");
+                return StatusCode(500,exception);
             }
         }
 
@@ -150,8 +150,8 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogWarning($"ERR : Method Delete with {name} !");
-                return BadRequest(exception);
+                _logger.LogError($"ERR : Method Delete with {name} !");
+                return StatusCode(500,exception);
             }
         }
     }

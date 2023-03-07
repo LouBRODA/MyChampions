@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using MyChampions.Controllers;
 using StubLib;
+using System.Xml.Linq;
 
 namespace TestAPI
 {
@@ -54,5 +55,43 @@ namespace TestAPI
             var champion = createdResult?.Value as ChampionDTO;
             Assert.IsNotNull(champion);
         }
+
+        //[TestMethod]
+        //public async Task TestPutChampion()
+        //{
+        //    //Arrange
+        //    var championDTO = new ChampionDTO
+        //    {
+        //        Name = "TestPut"
+        //    };
+
+        //    //Act
+        //    var championsResultPut = await championsController.Put("NameChanged",championDTO);
+
+        //    //Assert
+        //    var champion = championsResultPut as ChampionDTO;
+        //    Assert.AreNotEqual("TestPut",championDTO.Name);
+        //}
+
+        [TestMethod]
+        public async Task TestDeleteChampion()
+        {
+            //Arrange
+            var championDTO = new ChampionDTO
+            {
+                Name = "TestDelete"
+            };
+
+            //Act
+            var championsResult = await championsController.Delete(championDTO.Name);
+
+            //Assert
+            var createdResult = championsResult as CreatedAtActionResult;
+            Assert.IsNull(createdResult);
+
+            var champion = createdResult?.Value as ChampionDTO;
+            Assert.IsNull(champion);
+        }
+
     }
 }
