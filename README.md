@@ -40,7 +40,9 @@ Sommaire
 - __Vacances 3__ (_EF + Conso Services_) : Container Deployment Fonctionnel     
 - __TP 4__ (_Consommation et Développement de services_) : Travail sur Pagination et Filtrage Méthode `GET`      
 - __TP 4__ (_Entity Framework_) : Créations Entity + OneToMany Fonctionnel avec tests OK         
+- __TP 5__ (_Consommation et Développement de services_) : Création de `PUT` & `DELETE` + Gestion des exceptions dans Contrôleur        
 - __TP 5__ (_Entity Framework_) : Ajouts de tests pour `Champion` et tests pour `Skin` - Réflexion de l'implémentation des `Skill` et de l'ensemble des `Runes``- Début ManyToMany          
+- __TP 6__ (_Consommation et Développement de services_) : Ajout Logger Informations/Warning/Error dans Contrôleur + Début ajout Versioning + Reprise de `PUT` & `DELETE` avec tests + ``GetSkinsByName` dans ChampionsController + début ajout EFDataManager    
 
 
 *******
