@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Model;
 using StubLib;
+using System.Collections.Generic;
 using System.Xml.Linq;
+using static StubLib.StubData;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -78,7 +80,7 @@ namespace MyChampions.Controllers
 
         }
 
-        // GET api/<ChampionsController>/5
+        // GETBYNAME api/<ChampionsController>/5
         [ApiVersion("1.0")]
         [HttpGet("{name}")]
         public async Task<IActionResult> GetByName(string name)
@@ -94,6 +96,25 @@ namespace MyChampions.Controllers
             {
                 _logger.LogError($"ERR : Method GetByName with {name} !");
                 return StatusCode(500,exception);
+            }
+        }
+
+        // GETSKINSBYNAME api/<ChampionsController>/5
+        [ApiVersion("1.0")]
+        [HttpGet("name/skins")]
+        public async Task<IActionResult> GetSkinsByName(string name)
+        {
+            _logger.LogInformation($"Method GetSkinsByName called with {name}");
+            try
+            {
+                var items = await dataManager.ChampionsMgr.GetItemsByName(name, 0, 1);
+                var skins = await dataManager.SkinsMgr.GetItemsByChampion(items.First(), 0, await dataManager.SkinsMgr.GetNbItemsByChampion(items.First()));
+                return Ok(skins.Select(skin => skin?.ToDTO()));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError($"ERR : Method GetSkinsByName with {name} !");
+                return StatusCode(500, exception);
             }
         }
 

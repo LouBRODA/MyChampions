@@ -11,6 +11,8 @@ namespace API_MyChampions.Mapper
             return new ChampionDTO()
             {
                 Name = champion.Name,
+                Icon = champion.Icon,
+                Bio = champion.Bio,
             };
         }
 
