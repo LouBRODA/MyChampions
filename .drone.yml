@@ -25,6 +25,7 @@ steps:
       - dotnet restore LeagueOfLegends.sln
       - dotnet test LeagueOfLegends.sln --no-restore
     depends_on: [build]
+
   - name: code-analysis
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dronesonarplugin-dotnet6
     commands:
@@ -58,7 +59,7 @@ steps:
     when:
       branch:
         - master
-    depends_on: [ build ]
+    depends_on: [ code-analysis ]
 
   # docker image build
   - name: docker-build-and-push
@@ -72,6 +73,7 @@ steps:
          from_secret: SECRET_REGISTRY_USERNAME
        password:
          from_secret: SECRET_REGISTRY_PASSWORD
+    depends_on: [ generate-and-deploy-docs ]
          
   # container deployment
   - name: deploy-container
@@ -81,6 +83,7 @@ steps:
         CONTAINERNAME: container_champion
         COMMAND: create
         OVERWRITE: true
+    depends_on: [ docker-build-and-push ]
 volumes:
 - name: docs
   temp: {}
