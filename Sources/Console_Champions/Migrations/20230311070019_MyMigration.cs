@@ -7,7 +7,7 @@
 namespace ConsoleChampions.Migrations
 {
     /// <inheritdoc />
-    public partial class myMigration : Migration
+    public partial class MyMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,6 +45,19 @@ namespace ConsoleChampions.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RunePageEntity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RunePageEntity", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SkillEntity",
                 columns: table => new
                 {
@@ -52,17 +65,11 @@ namespace ConsoleChampions.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Type = table.Column<int>(type: "INTEGER", nullable: true),
-                    ChampionEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Type = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SkillEntity", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SkillEntity_ChampionEntity_ChampionEntityId",
-                        column: x => x.ChampionEntityId,
-                        principalTable: "ChampionEntity",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -85,6 +92,30 @@ namespace ConsoleChampions.Migrations
                         name: "FK_SkinEntity_ChampionEntity_ForeignChampion",
                         column: x => x.ForeignChampion,
                         principalTable: "ChampionEntity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChampionEntitySkillEntity",
+                columns: table => new
+                {
+                    ChampionsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SkillsId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChampionEntitySkillEntity", x => new { x.ChampionsId, x.SkillsId });
+                    table.ForeignKey(
+                        name: "FK_ChampionEntitySkillEntity_ChampionEntity_ChampionsId",
+                        column: x => x.ChampionsId,
+                        principalTable: "ChampionEntity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChampionEntitySkillEntity_SkillEntity_SkillsId",
+                        column: x => x.SkillsId,
+                        principalTable: "SkillEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -113,13 +144,22 @@ namespace ConsoleChampions.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "SkillEntity",
-                columns: new[] { "Id", "ChampionEntityId", "Description", "Name", "Type" },
+                table: "RunePageEntity",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, null, "FirePower", 1 },
-                    { 2, null, null, "MentalStrenght", 2 },
-                    { 3, null, null, "UltimEnd", 3 }
+                    { 1, "RunePage1" },
+                    { 2, "RunePage2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SkillEntity",
+                columns: new[] { "Id", "Description", "Name", "Type" },
+                values: new object[,]
+                {
+                    { 1, null, "FirePower", 1 },
+                    { 2, null, "MentalStrenght", 2 },
+                    { 3, null, "UltimEnd", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -139,9 +179,9 @@ namespace ConsoleChampions.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SkillEntity_ChampionEntityId",
-                table: "SkillEntity",
-                column: "ChampionEntityId");
+                name: "IX_ChampionEntitySkillEntity_SkillsId",
+                table: "ChampionEntitySkillEntity",
+                column: "SkillsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SkinEntity_ForeignChampion",
@@ -153,13 +193,19 @@ namespace ConsoleChampions.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ChampionEntitySkillEntity");
+
+            migrationBuilder.DropTable(
                 name: "RuneEntity");
 
             migrationBuilder.DropTable(
-                name: "SkillEntity");
+                name: "RunePageEntity");
 
             migrationBuilder.DropTable(
                 name: "SkinEntity");
+
+            migrationBuilder.DropTable(
+                name: "SkillEntity");
 
             migrationBuilder.DropTable(
                 name: "ChampionEntity");

@@ -41,7 +41,7 @@ namespace Console_Champions
                 .HasForeignKey("ForeignChampion");
 
             modelBuilder.Entity<SkillEntity>()
-                .HasMany<ChampionEntity>(s => s.Champions)
+                .HasMany(s => s.Champions)
                 .WithMany(c => c.Skills);
         }
     }

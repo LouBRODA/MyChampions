@@ -18,8 +18,8 @@ namespace Console_Champions
         public string? Image { get; set; }
         public string? Bio { get; set; }
 
-        public ICollection<SkinEntity> Skins { get; set; }
-        public ICollection<SkillEntity> Skills { get; set; }
+        public ICollection<SkinEntity>? Skins { get; set; }
+        public ICollection<SkillEntity>? Skills { get; set; }
     }   
     
 }

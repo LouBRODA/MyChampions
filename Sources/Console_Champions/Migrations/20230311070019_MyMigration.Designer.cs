@@ -11,14 +11,29 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleChampions.Migrations
 {
     [DbContext(typeof(StubbedContext))]
-    [Migration("20230226132240_myMigration")]
-    partial class myMigration
+    [Migration("20230311070019_MyMigration")]
+    partial class MyMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
+
+            modelBuilder.Entity("ChampionEntitySkillEntity", b =>
+                {
+                    b.Property<int>("ChampionsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SkillsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ChampionsId", "SkillsId");
+
+                    b.HasIndex("SkillsId");
+
+                    b.ToTable("ChampionEntitySkillEntity");
+                });
 
             modelBuilder.Entity("Console_Champions.ChampionEntity", b =>
                 {
@@ -118,13 +133,36 @@ namespace ConsoleChampions.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Console_Champions.SkillEntity", b =>
+            modelBuilder.Entity("Console_Champions.RunePageEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ChampionEntityId")
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RunePageEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "RunePage1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "RunePage2"
+                        });
+                });
+
+            modelBuilder.Entity("Console_Champions.SkillEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
@@ -137,8 +175,6 @@ namespace ConsoleChampions.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChampionEntityId");
 
                     b.ToTable("SkillEntity");
 
@@ -250,11 +286,19 @@ namespace ConsoleChampions.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Console_Champions.SkillEntity", b =>
+            modelBuilder.Entity("ChampionEntitySkillEntity", b =>
                 {
                     b.HasOne("Console_Champions.ChampionEntity", null)
-                        .WithMany("Skills")
-                        .HasForeignKey("ChampionEntityId");
+                        .WithMany()
+                        .HasForeignKey("ChampionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Console_Champions.SkillEntity", null)
+                        .WithMany()
+                        .HasForeignKey("SkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Console_Champions.SkinEntity", b =>
@@ -270,8 +314,6 @@ namespace ConsoleChampions.Migrations
 
             modelBuilder.Entity("Console_Champions.ChampionEntity", b =>
                 {
-                    b.Navigation("Skills");
-
                     b.Navigation("Skins");
                 });
 #pragma warning restore 612, 618
