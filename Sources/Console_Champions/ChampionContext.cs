@@ -43,6 +43,15 @@ namespace Console_Champions
             modelBuilder.Entity<SkillEntity>()
                 .HasMany(s => s.Champions)
                 .WithMany(c => c.Skills);
+
+            modelBuilder.Entity<RunePageEntity>()
+                .HasMany(rp => rp.Champions)
+                .WithMany(c => c.RunePages);
+
+            modelBuilder.Entity<RuneEntity>()
+                .HasMany(r => r.RunePages)
+                .WithMany(rp => rp.Runes);
+
         }
     }
 }

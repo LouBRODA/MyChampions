@@ -20,6 +20,7 @@ namespace Console_Champions
 
         public ICollection<SkinEntity>? Skins { get; set; }
         public ICollection<SkillEntity>? Skills { get; set; }
+        public ICollection<RunePageEntity>? RunePages { get; set; }
     }   
     
 }

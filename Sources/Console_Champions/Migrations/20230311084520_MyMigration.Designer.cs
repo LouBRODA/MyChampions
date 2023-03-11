@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleChampions.Migrations
 {
     [DbContext(typeof(StubbedContext))]
-    [Migration("20230311070019_MyMigration")]
+    [Migration("20230311084520_MyMigration")]
     partial class MyMigration
     {
         /// <inheritdoc />
@@ -19,6 +19,21 @@ namespace ConsoleChampions.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
+
+            modelBuilder.Entity("ChampionEntityRunePageEntity", b =>
+                {
+                    b.Property<int>("ChampionsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RunePagesId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ChampionsId", "RunePagesId");
+
+                    b.HasIndex("RunePagesId");
+
+                    b.ToTable("ChampionEntityRunePageEntity");
+                });
 
             modelBuilder.Entity("ChampionEntitySkillEntity", b =>
                 {
@@ -286,6 +301,36 @@ namespace ConsoleChampions.Migrations
                         });
                 });
 
+            modelBuilder.Entity("RuneEntityRunePageEntity", b =>
+                {
+                    b.Property<int>("RunePagesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RunesId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("RunePagesId", "RunesId");
+
+                    b.HasIndex("RunesId");
+
+                    b.ToTable("RuneEntityRunePageEntity");
+                });
+
+            modelBuilder.Entity("ChampionEntityRunePageEntity", b =>
+                {
+                    b.HasOne("Console_Champions.ChampionEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ChampionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Console_Champions.RunePageEntity", null)
+                        .WithMany()
+                        .HasForeignKey("RunePagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ChampionEntitySkillEntity", b =>
                 {
                     b.HasOne("Console_Champions.ChampionEntity", null)
@@ -310,6 +355,21 @@ namespace ConsoleChampions.Migrations
                         .IsRequired();
 
                     b.Navigation("Champion");
+                });
+
+            modelBuilder.Entity("RuneEntityRunePageEntity", b =>
+                {
+                    b.HasOne("Console_Champions.RunePageEntity", null)
+                        .WithMany()
+                        .HasForeignKey("RunePagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Console_Champions.RuneEntity", null)
+                        .WithMany()
+                        .HasForeignKey("RunesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Console_Champions.ChampionEntity", b =>

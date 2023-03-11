@@ -10,6 +10,8 @@ namespace Console_Champions
     {
         public int Id { get; set; }
         public string? Name { get; set; }
+        public ICollection<RuneEntity>? Runes { get; set; }
+        public ICollection<ChampionEntity>? Champions { get; set; }
 
     }
 }
