@@ -17,6 +17,11 @@ namespace Console_Champions
         public ChampionContext() { }
 
         public DbSet<ChampionEntity> ChampionEntity { get; set; }
+        public DbSet<SkinEntity> SkinEntity { get; set; }
+        public DbSet<SkillEntity> SkillEntity { get; set; }
+
+
+
 
         /*protected override void OnConfiguring(DbContextOptionsBuilder options) { 
             base.OnConfiguring(options);

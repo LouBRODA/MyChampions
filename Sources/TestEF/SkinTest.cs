@@ -18,12 +18,12 @@ namespace TestEF
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
 
-            var options = new DbContextOptionsBuilder<SkinContext>()
+            var options = new DbContextOptionsBuilder<ChampionContext>()
                 .UseInMemoryDatabase(databaseName: "Get_Skin_Test_database")
                 .Options;
 
             //prepares the database with one instance of the context
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -39,7 +39,7 @@ namespace TestEF
             }
 
             //uses another instance of the context to do the tests
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -56,12 +56,12 @@ namespace TestEF
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
 
-            var options = new DbContextOptionsBuilder<SkinContext>()
+            var options = new DbContextOptionsBuilder<ChampionContext>()
                 .UseInMemoryDatabase(databaseName: "Add_Skin_Test_database")
                 .Options;
 
             //prepares the database with one instance of the context
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -79,7 +79,7 @@ namespace TestEF
             }
 
             //uses another instance of the context to do the tests
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -88,17 +88,17 @@ namespace TestEF
         }
 
         [Fact]
-        public void Modify_Champion_Test()
+        public void Modify_Skin_Test()
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
 
-            var options = new DbContextOptionsBuilder<SkinContext>()
+            var options = new DbContextOptionsBuilder<ChampionContext>()
                 .UseInMemoryDatabase(databaseName: "Modify_Skin_database")
                 .Options;
 
             //prepares the database with one instance of the context
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -115,7 +115,7 @@ namespace TestEF
             }
 
             //uses another instance of the context to do the tests
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -129,7 +129,7 @@ namespace TestEF
             }
 
             //uses another instance of the context to do the tests
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -146,12 +146,12 @@ namespace TestEF
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
 
-            var options = new DbContextOptionsBuilder<SkinContext>()
+            var options = new DbContextOptionsBuilder<ChampionContext>()
                 .UseInMemoryDatabase(databaseName: "Delete_Skin_database")
                 .Options;
 
             //prepares the database with one instance of the context
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -165,7 +165,7 @@ namespace TestEF
             }
 
             //uses another instance of the context to do the tests
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
@@ -176,7 +176,7 @@ namespace TestEF
             }
 
             //uses another instance of the context to do the tests
-            using (var context = new SkinContext(options))
+            using (var context = new ChampionContext(options))
             {
                 context.Database.EnsureCreated();
 
