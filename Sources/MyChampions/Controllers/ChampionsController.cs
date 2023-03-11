@@ -5,13 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Model;
 using StubLib;
+using System.Collections.Generic;
 using System.Xml.Linq;
+using static StubLib.StubData;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MyChampions.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class ChampionsController : ControllerBase
     {
@@ -71,14 +73,14 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             { 
-                _logger.LogWarning($"ERR : Method Get with {pageRequest} and {name} !");
-                return BadRequest(exception); 
+                _logger.LogError($"ERR : Method Get with {pageRequest} and {name} !");
+                return StatusCode(500,exception); 
             }
 
 
         }
 
-        // GET api/<ChampionsController>/5
+        // GETBYNAME api/<ChampionsController>/5
         [ApiVersion("1.0")]
         [HttpGet("{name}")]
         public async Task<IActionResult> GetByName(string name)
@@ -92,8 +94,27 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogWarning($"ERR : Method GetByName with {name} !");
-                return BadRequest(exception);
+                _logger.LogError($"ERR : Method GetByName with {name} !");
+                return StatusCode(500,exception);
+            }
+        }
+
+        // GETSKINSBYNAME api/<ChampionsController>/5
+        [ApiVersion("1.0")]
+        [HttpGet("name/skins")]
+        public async Task<IActionResult> GetSkinsByName(string name)
+        {
+            _logger.LogInformation($"Method GetSkinsByName called with {name}");
+            try
+            {
+                var items = await dataManager.ChampionsMgr.GetItemsByName(name, 0, 1);
+                var skins = await dataManager.SkinsMgr.GetItemsByChampion(items.First(), 0, await dataManager.SkinsMgr.GetNbItemsByChampion(items.First()));
+                return Ok(skins.Select(skin => skin?.ToDTO()));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError($"ERR : Method GetSkinsByName with {name} !");
+                return StatusCode(500, exception);
             }
         }
 
@@ -112,8 +133,8 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogWarning($"ERR : Method Post with {champion} !");
-                return BadRequest(exception);
+                _logger.LogError($"ERR : Method Post with {champion} !");
+                return StatusCode(500,exception);
             }
         }
 
@@ -131,8 +152,8 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogWarning($"ERR : Method Put with {name} and {champion} !");
-                return BadRequest(exception);
+                _logger.LogError($"ERR : Method Put with {name} and {champion} !");
+                return StatusCode(500,exception);
             }
         }
 
@@ -150,8 +171,8 @@ namespace MyChampions.Controllers
             }
             catch (Exception exception)
             {
-                _logger.LogWarning($"ERR : Method Delete with {name} !");
-                return BadRequest(exception);
+                _logger.LogError($"ERR : Method Delete with {name} !");
+                return StatusCode(500,exception);
             }
         }
     }
