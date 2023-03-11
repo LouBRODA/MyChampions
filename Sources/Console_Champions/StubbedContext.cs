@@ -35,12 +35,12 @@ namespace Console_Champions
                                     new { Id = 9, ForeignChampion = 3, Name = "Foxfire" }
                 );
 
-            modelBuilder.Entity<RuneEntity>().HasData(new { Id = 1, Name = "Conqueror", Type = RuneFamilyEntity.Precision },
-                                    new { Id = 2, Name = "Triumph", Type = RuneFamilyEntity.Precision },
-                                    new { Id = 3, Name = "Legend: Alacrity", Type = RuneFamilyEntity.Precision },
-                                    new { Id = 4, Name = "Legend: Tenacity", Type = RuneFamilyEntity.Precision },
-                                    new { Id = 5, Name = "last stand", Type = RuneFamilyEntity.Domination },
-                                    new { Id = 6, Name = "last stand 2", Type = RuneFamilyEntity.Domination }
+            modelBuilder.Entity<RuneEntity>().HasData(new { Id = 1, Name = "Conqueror", Family = RuneFamilyEntity.Precision },
+                                    new { Id = 2, Name = "Triumph", Family = RuneFamilyEntity.Precision },
+                                    new { Id = 3, Name = "Legend: Alacrity", Family = RuneFamilyEntity.Precision },
+                                    new { Id = 4, Name = "Legend: Tenacity", Family = RuneFamilyEntity.Precision },
+                                    new { Id = 5, Name = "last stand", Family = RuneFamilyEntity.Domination },
+                                    new { Id = 6, Name = "last stand 2", Family = RuneFamilyEntity.Domination }
                 );
 
 

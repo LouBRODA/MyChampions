@@ -19,6 +19,9 @@ namespace Console_Champions
         public DbSet<ChampionEntity> ChampionEntity { get; set; }
         public DbSet<SkinEntity> SkinEntity { get; set; }
         public DbSet<SkillEntity> SkillEntity { get; set; }
+        public DbSet<RunePageEntity> RunePageEntity { get; set; }
+        public DbSet<RuneEntity> RuneEntity { get; set; }
+
 
 
 

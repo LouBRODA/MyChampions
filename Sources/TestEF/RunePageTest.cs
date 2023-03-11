@@ -9,17 +9,16 @@ using System.Threading.Tasks;
 
 namespace TestEF
 {
-    public class SkillTest
+    public class RunePageTest
     {
-
         [Fact]
-        public void Get_Skill_Test()
+        public void Get_RunePage_Test()
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
 
             var options = new DbContextOptionsBuilder<ChampionContext>()
-                .UseInMemoryDatabase(databaseName: "Get_Skill_Test_database")
+                .UseInMemoryDatabase(databaseName: "Get_RunePage_Test_database")
                 .Options;
 
             //prepares the database with one instance of the context
@@ -27,10 +26,10 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                SkillEntity firepower = new SkillEntity { Id = 1, Name = "FirePower", Type = SkillTypeEntity.Basic };
-                ChampionEntity akali = new ChampionEntity() { Name = "Akali", Icon = "iconAkali", Image = "imageAkali", Bio = "bioAkali", Skills = new List<SkillEntity> { firepower } };
+                RunePageEntity runePage1 = new RunePageEntity { Id = 1, Name = "RunePage1" };
+                ChampionEntity akali = new ChampionEntity() { Name = "Akali", Icon = "iconAkali", Image = "imageAkali", Bio = "bioAkali", RunePages = new List<RunePageEntity> { runePage1 } };
 
-                context.SkillEntity.Add(firepower);
+                context.RunePageEntity.Add(runePage1);
                 context.ChampionEntity.Add(akali);
 
                 context.SaveChanges();
@@ -41,19 +40,19 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                //Assert.Equal("FirePower", context.ChampionEntity.First().Skills.First().Name);
+                //Assert.Equal("RunePage1", context.ChampionEntity.First().RunePages.First().Name);
 
             }
         }
 
         [Fact]
-        public void Add_Skill_Test()
+        public void Add_RunePage_Test()
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
 
             var options = new DbContextOptionsBuilder<ChampionContext>()
-                .UseInMemoryDatabase(databaseName: "Add_Skill_Test_database")
+                .UseInMemoryDatabase(databaseName: "Add_RunePage_Test_database")
                 .Options;
 
             //prepares the database with one instance of the context
@@ -61,13 +60,11 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                SkillEntity firepower = new SkillEntity { Id = 1, Name = "FirePower", Type = SkillTypeEntity.Basic };
-                SkillEntity mentalstrenght = new SkillEntity { Id = 2, Name = "MentalStrenght", Type = SkillTypeEntity.Passive };
-                SkillEntity ultimend = new SkillEntity { Id = 3, Name = "UltimEnd", Type = SkillTypeEntity.Ultimate };
+                RunePageEntity runePage1 = new RunePageEntity { Id = 1, Name = "RunePage1" };
+                RunePageEntity runePage2 = new RunePageEntity { Id = 2, Name = "RunePage2" };
 
-                context.SkillEntity.Add(firepower);
-                context.SkillEntity.Add(mentalstrenght);
-                context.SkillEntity.Add(ultimend);
+                context.RunePageEntity.Add(runePage1);
+                context.RunePageEntity.Add(runePage2);
 
                 context.SaveChanges();
             }
@@ -77,18 +74,18 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                Assert.Equal(3, context.SkillEntity.Count());
+                Assert.Equal(2, context.RunePageEntity.Count());
             }
         }
 
         [Fact]
-        public void Modify_Skill_Test()
+        public void Modify_RunePage_Test()
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
 
             var options = new DbContextOptionsBuilder<ChampionContext>()
-                .UseInMemoryDatabase(databaseName: "Modify_Skill_database")
+                .UseInMemoryDatabase(databaseName: "Modify_RunePage_database")
                 .Options;
 
             //prepares the database with one instance of the context
@@ -96,13 +93,11 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                SkillEntity firepower = new SkillEntity { Id = 1, Name = "FirePower", Type = SkillTypeEntity.Basic };
-                SkillEntity mentalstrenght = new SkillEntity { Id = 2, Name = "MentalStrenght", Type = SkillTypeEntity.Passive };
-                SkillEntity ultimend = new SkillEntity { Id = 3, Name = "UltimEnd", Type = SkillTypeEntity.Ultimate };
+                RunePageEntity runePage1 = new RunePageEntity { Id = 1, Name = "RunePage1" };
+                RunePageEntity runePage2 = new RunePageEntity { Id = 2, Name = "RunePage2" };
 
-                context.SkillEntity.Add(firepower);
-                context.SkillEntity.Add(mentalstrenght);
-                context.SkillEntity.Add(ultimend);
+                context.RunePageEntity.Add(runePage1);
+                context.RunePageEntity.Add(runePage2);
 
                 context.SaveChanges();
             }
@@ -112,12 +107,12 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                string nameToFind = "en";
-                Assert.Equal(2, context.SkillEntity.Where(n => n.Name.ToLower().Contains(nameToFind)).Count());
-                string nameToFind2 = "ow";
-                Assert.Equal(1, context.SkillEntity.Where(n => n.Name.ToLower().Contains(nameToFind2)).Count());
-                var firepower = context.SkillEntity.Where(n => n.Name.ToLower().Contains(nameToFind2)).First();
-                firepower.Name = "WaterPower";
+                string nameToFind = "age";
+                Assert.Equal(2, context.RunePageEntity.Where(n => n.Name.ToLower().Contains(nameToFind)).Count());
+                string nameToFind2 = "1";
+                Assert.Equal(1, context.RunePageEntity.Where(n => n.Name.ToLower().Contains(nameToFind2)).Count());
+                var runePage1 = context.RunePageEntity.Where(n => n.Name.ToLower().Contains(nameToFind2)).First();
+                runePage1.Name = "RunePage3";
 
                 context.SaveChanges();
             }
@@ -127,21 +122,21 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                string nameToFind = "Fire";
-                Assert.Equal(0, context.SkillEntity.Where(n => n.Name.ToLower().Contains(nameToFind)).Count());
-                //string nameToFind2 = "Water";
-                //Assert.Equal(1, context.SkillEntity.Where(n => n.Name.ToLower().Contains(nameToFind2)).Count());
+                string nameToFind = "1";
+                Assert.Equal(0, context.RunePageEntity.Where(n => n.Name.ToLower().Contains(nameToFind)).Count());
+                string nameToFind2 = "3";
+                Assert.Equal(1, context.RunePageEntity.Where(n => n.Name.ToLower().Contains(nameToFind2)).Count());
             }
         }
 
         [Fact]
-        public void Delete_Skill_Test()
+        public void Delete_RunePage_Test()
         {
             //connection must be opened to use In-memory database
             var connection = new SqliteConnection("DataSource=:memory:");
 
             var options = new DbContextOptionsBuilder<ChampionContext>()
-                .UseInMemoryDatabase(databaseName: "Delete_Skill_database")
+                .UseInMemoryDatabase(databaseName: "Delete_RunePage_database")
                 .Options;
 
             //prepares the database with one instance of the context
@@ -149,20 +144,9 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                SkillEntity firepower = new SkillEntity { Id = 1, Name = "FirePower", Type = SkillTypeEntity.Basic };
+                RunePageEntity runePage1 = new RunePageEntity { Id = 1, Name = "RunePage1" };
 
-                context.SkillEntity.Add(firepower);
-
-                context.SaveChanges();
-            }
-
-            //uses another instance of the context to do the tests
-            using (var context = new ChampionContext(options))
-            {
-                context.Database.EnsureCreated();
-
-                var skill = context.SkillEntity.First();
-                context.SkillEntity.Remove(skill);
+                context.RunePageEntity.Add(runePage1);
 
                 context.SaveChanges();
             }
@@ -172,9 +156,21 @@ namespace TestEF
             {
                 context.Database.EnsureCreated();
 
-                Assert.Equal(0, context.SkillEntity.Count());
+                var runePage = context.RunePageEntity.First();
+                context.RunePageEntity.Remove(runePage);
+
+                context.SaveChanges();
+            }
+
+            //uses another instance of the context to do the tests
+            using (var context = new ChampionContext(options))
+            {
+                context.Database.EnsureCreated();
+
+                Assert.Equal(0, context.RunePageEntity.Count());
             }
         }
+    }     
 
-    }
 }
+
