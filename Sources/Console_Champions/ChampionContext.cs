@@ -17,6 +17,14 @@ namespace Console_Champions
         public ChampionContext() { }
 
         public DbSet<ChampionEntity> ChampionEntity { get; set; }
+        public DbSet<SkinEntity> SkinEntity { get; set; }
+        public DbSet<SkillEntity> SkillEntity { get; set; }
+        public DbSet<RunePageEntity> RunePageEntity { get; set; }
+        public DbSet<RuneEntity> RuneEntity { get; set; }
+
+
+
+
 
         /*protected override void OnConfiguring(DbContextOptionsBuilder options) { 
             base.OnConfiguring(options);
@@ -41,8 +49,17 @@ namespace Console_Champions
                 .HasForeignKey("ForeignChampion");
 
             modelBuilder.Entity<SkillEntity>()
-                .HasMany<ChampionEntity>(s => s.Champions)
+                .HasMany(s => s.Champions)
                 .WithMany(c => c.Skills);
+
+            modelBuilder.Entity<RunePageEntity>()
+                .HasMany(rp => rp.Champions)
+                .WithMany(c => c.RunePages);
+
+            modelBuilder.Entity<RuneEntity>()
+                .HasMany(r => r.RunePages)
+                .WithMany(rp => rp.Runes);
+
         }
     }
 }

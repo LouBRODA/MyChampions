@@ -12,6 +12,7 @@ namespace Console_Champions
         public string? Name { get; set; }
         public string? Description { get; set; }
         public RuneFamilyEntity? Family { get; set; }
+        public ICollection<RunePageEntity>? RunePages { get; set; }
 
     }
 }
