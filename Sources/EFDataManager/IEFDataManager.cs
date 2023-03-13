@@ -12,8 +12,10 @@ namespace EFDataManager
     public class IEFDataManager : IDataManager
     {
         IChampionEFDataManager ChampionsMgr { get; }
+        ISkinEFDataManager SkinsMgr { get; }
+
         IChampionsManager IDataManager.ChampionsMgr => throw new NotImplementedException();
-        public ISkinsManager SkinsMgr => throw new NotImplementedException();
+        ISkinsManager IDataManager.SkinsMgr => throw new NotImplementedException();
         public IRunesManager RunesMgr => throw new NotImplementedException();
         public IRunePagesManager RunePagesMgr => throw new NotImplementedException();
 
