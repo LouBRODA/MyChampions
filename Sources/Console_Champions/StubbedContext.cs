@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/*
 namespace Console_Champions
 {
     public class StubbedContext : ChampionContext
@@ -18,9 +18,18 @@ namespace Console_Champions
             SkillEntity mentalstrenght = new SkillEntity { Id = 2, Name = "MentalStrenght", Type = SkillTypeEntity.Passive };
             SkillEntity ultimend = new SkillEntity { Id = 3, Name = "UltimEnd", Type = SkillTypeEntity.Ultimate };
 
-            ChampionEntity akali = new ChampionEntity { Id = 1, Name = "Akali", Class = ChampClassEntity.Assassin, Skills = new List<SkillEntity> { firepower, mentalstrenght } };
-            ChampionEntity aatrox = new ChampionEntity { Id = 2, Name = "Aatrox", Class = ChampClassEntity.Fighter, Skills = new List<SkillEntity> { firepower, ultimend } };
-            ChampionEntity ahri = new ChampionEntity { Id = 3, Name = "Ahri", Class = ChampClassEntity.Mage, Skills = new List<SkillEntity> { mentalstrenght, ultimend } };
+            ChampionEntity akali = new ChampionEntity { Id = 1, Name = "Akali", Class = ChampClassEntity.Assassin };
+            ChampionEntity aatrox = new ChampionEntity { Id = 2, Name = "Aatrox", Class = ChampClassEntity.Fighter };
+            ChampionEntity ahri = new ChampionEntity { Id = 3, Name = "Ahri", Class = ChampClassEntity.Mage };
+
+            /*
+            var akali = new { Id = 1, Name = "Akali", Class = ChampClassEntity.Assassin, Skills = new[] 
+                { 
+                    new { Id = 1, Name = "FirePower", Type = SkillTypeEntity.Basic, ChampionsId=1 },
+                    new { Id = 2, Name = "MentalStrenght", Type = SkillTypeEntity.Passive, ChampionsId=1 },
+                } 
+            };
+
 
             modelBuilder.Entity<ChampionEntity>().HasData(akali, aatrox, ahri);
 
@@ -52,3 +61,4 @@ namespace Console_Champions
         }
     }
 }
+*/

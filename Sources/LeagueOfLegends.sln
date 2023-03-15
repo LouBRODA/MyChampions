@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console_Champions", "Consol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEF", "TestEF\TestEF.csproj", "{F1BE79EE-6D98-42C7-92FB-DAED687FE149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFDataManager", "EFDataManager\EFDataManager.csproj", "{2EE0BCF0-D7EE-4EA1-A9D2-28017CC54182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFDataManager", "EFDataManager\EFDataManager.csproj", "{2EE0BCF0-D7EE-4EA1-A9D2-28017CC54182}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
