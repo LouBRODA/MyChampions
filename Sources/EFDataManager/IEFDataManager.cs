@@ -6,22 +6,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static StubLib.StubData;
 
 namespace EFDataManager
 {
     public class IEFDataManager : IDataManager
     {
-        IChampionEFDataManager ChampionsMgr { get; }
-        ISkinEFDataManager SkinsMgr { get; }
-
-        IChampionsManager IDataManager.ChampionsMgr => throw new NotImplementedException();
-        ISkinsManager IDataManager.SkinsMgr => throw new NotImplementedException();
-        public IRunesManager RunesMgr => throw new NotImplementedException();
-        public IRunePagesManager RunePagesMgr => throw new NotImplementedException();
 
         public IEFDataManager(ChampionContext context) => EFDataContext = context;
+
         public ChampionContext EFDataContext { get; }
-            
+
+        public IChampionsManager ChampionsMgr { get; }
+
+        public ISkinsManager SkinsMgr { get; }
+
+        public IRunesManager RunesMgr { get; }
+
+        public IRunePagesManager RunePagesMgr { get; }
     }
 
 }

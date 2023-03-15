@@ -24,8 +24,6 @@ namespace Console_Champions
 
 
 
-
-
         /*protected override void OnConfiguring(DbContextOptionsBuilder options) { 
             base.OnConfiguring(options);
             options.UseSqlite($"DataSource = Console_Champion.ChampionsDB.db");
