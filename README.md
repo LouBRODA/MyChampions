@@ -11,8 +11,9 @@ Sommaire
  2. [Progression](#progression)
  3. [Présentation du projet](#presentation)
  4. [Contenu](#contenu)
- 5. [Conception](#conception)
- 6. [Auteur](#auteur)
+ 5. [Architecture](#architecture)
+ 6. [Conception](#conception)
+ 7. [Auteur](#auteur)
 
 *******
 
@@ -44,6 +45,8 @@ Sommaire
 - __TP 5__ (_Entity Framework_) : Ajouts de tests pour `Champion` et tests pour `Skin` - Réflexion de l'implémentation des `Skill` et de l'ensemble des `Runes` - Début ManyToMany          
 - __TP 6__ (_Consommation et Développement de services_) : Ajout Logger Informations/Warning/Error dans Contrôleur + Début ajout Versioning + Reprise de `PUT` & `DELETE` avec tests + `GetSkinsByName` dans ChampionsController + début ajout EFDataManager    
 - __TP 6__ (_Entity Framework_) : All `ManyToMany` Finis + Ajout de tous les `Mappers` + Mise en place de tous les test   
+- __TP 7__ (_Consommation et Développement de services_) : Installations et mise à jour pour le client MAUI & avancement de l'`EFDataManager`      
+- __TP 7__ (_Entity Framework_) : Ajout de données dans `Program.cs` & Déploiement de la Database + Création de toutes les interfaces de `EFDataManager`
 
 *******
 
@@ -59,14 +62,10 @@ MyChampions est une application référençant les différents personnages du c�
 
 <div id='contenu'/>
 
-## Fonctionnalités
-
-- Non encore décidées
-
 ## Ressources
 
 - Temps
-    - 23 Janvier au Avril    
+    - 23 Janvier au 26 Mars    
 - Matériel
     - Ordinateurs portables sous Windows   
     - Visual Studio 2022    
@@ -77,6 +76,91 @@ MyChampions est une application référençant les différents personnages du c�
 
 - Personne 
     - 1 étudiant en BUT Informatique
+
+*******
+
+<div id='architecture'/>
+
+# **Description Architecture Globale Application : MyChampions**
+
+![](images_README/archi_generale_mychampions.png)
+
+## **API (Application Programming Interface)**
+
+Une API est un moyen de mettre à disposition des ressources (données).
+Dans ce projet, nous avons une API **RESTful** : URI (Uniform Resource Identifier) soit URL + encre
+
+_Qu'est ce qu'une API **REST** ?_  
+REST = REpresentational State Transfer :
+- _Uniforme_ : l'interface est uniforme à tous les niveaux
+- _Stateless_ : une API REST ne doit pas maintenir de session 
+- _Client/Server ("Separation of Concerns")_ : l'API REST n'est pas concerné par l'affichage, les interactions utilisateur et la session
+- _Layered_ : La présence de "connecteurs" intermédiaires doit être implicite pour le client et le serveur
+
+
+### **ChampionsController**
+
+Nous avons principalement travaillé dans cette partie sur le contrôleur de la classe `Champion`.  
+
+Un contrôleur représente des routes et des ressources. Il s'agit dans notre cas plus précisément d'un contrôleur d'API avec ajout écriture/lecture.  
+Nous avons donc mis en place dans celui-ci l'utilisation des verbes **HTTP** : 
+- _GET_ : récupérer une ressource
+- _POST_ : créer une ressource
+- _PUT_ : mettre à jour une ressource
+- _DELETE_ : supprimer une ressource
+
+Afin de mettre cela en place nous avions besoin d'un `ChampionDTO` (Data Transfer Object) qui permet d'avoir la maîtrise de ce qu'on expose dans l'API.   
+Cependant, il est primordial de pouvoir passer simplement du `ChampionDTO` au `Champion` et c'est pour cela que nous avons également développer un `ChampionMapper`.   
+
+En plus des quatre verbes dont nous avons parlé plus tôt, nous avons également dû mettre en place plusieurs autres fonctionnalités pour apporter des éléments en plus à notre API comme le **Filtrage** pour choisir qu'une partie des données ou la **Pagination** pour retrouver un certain nombre précis de Champion par page.
+
+### **TestChampionsController**
+
+Au delà de simplement mettre en place un contrôleur, il est important également de le tester pour s'assurer de son bon fonctionnement.   
+Nous avons fait le choix dans cette partie de simplement faire des _tests d'intégration_ (tester une fonctionnalité ou un assemblage) et des _tests unitaires_ (tester un bout d'une méthode).  
+Nous utilisons pour cela le Framework **MSTest** afin de tester chacunes des opérations **CRUD** (Create, Read, Update, Delete).
+
+Dans une optique de qualité de développement, nous avons également essayé de privilégier dans notre code et notamment dans celui de notre contrôleur l'utilisation de **Logs**.  
+Ces derniers permettent de récolter des informations ou des avertissements lors du déploiement et de l'utilisation de notre code.
+
+### **Déploiement de l'API**
+
+Nous utilisons dans notre projet un **container Docker** pour stocker notre API.  
+Le Dockerfile lié à cela va s'exécuter à chaque fois avec notre **CI** mise en place sur _Code#0_.
+
+---
+
+## **EF (Entity Framework)**
+
+Souvent appelé EF Core, Entity Framework est un **ORM** (Object Relational Mapper) qui a pour but de simplifier la création de tables et des requêtes de base de données. 
+
+### **Classes `Entity`**
+
+Une **Entity** en EF est une classe qui correspond à une table de base de données.  
+On en retrouve ainsi une différente pour chaque classe du modèle (`Champion`, `Skin`, `Skill`, `RunePage`, `Rune`...).   
+
+### **Classe `ChampionDBContext`**
+
+La liaison entre les classes se fait elle au sein du **Context** principal.  
+
+La classe de contexte représente une session avec la base de données sous-jacente.  
+Une instance de la classe de contexte représente des modèles d'unité de travail et de référentiel dans lesquels elle peut combiner plusieurs modifications dans une seule transaction de base de données.  
+La classe de contexte est utilisée pour interroger ou enregistrer des données dans la base de données. Elle est également utilisée pour configurer les classes de domaine, les mappages liés à la base de données, modifier les paramètres de suivi, la mise en cache, les transactions...  
+
+Il faut savoir qu'il existe deux types de liaison principales entre deux classes :
+- **One To Many** : une entité d'un type est associé à plusieurs entités d'un autre type (_exemple : un champion possède plusieurs skins mais un skin ne peut appartenir qu'à un seul champion_).
+- **Many To Many** : les entités d'un type peuvent appartenir à plusieurs entités d'un autre type (_exemple : un champion à plusieurs skills et chaque skill peut appartenir à plusieurs champions_).
+
+### **Classes `Mapper`**
+
+Nous retrouvons, sensiblement comme dans la partie `API`, une classe pour passer du type `ChampionEntity` à `Champion`.  
+Ceci peut notamment être utilisé dans les tests dont nous allons parler dès à présent.
+
+### **Tests EF**
+
+Nous effectuons en `Entity Framework` les tests unitaire d'une façon particulière appelée : **Testing In Memory**. Cela signifie que les données enregistrées en mémoire pour effectuer des tests seront effacées à la fin de ces derniers.
+
+Nous utilisons personnellement le Framework **xUnit** afin de tester pour chaque classe Entity l'ensemble des opérations **CRUD** auxquelles nous pensons : _Get_, _Add_, _Modify_ & _Delete_.
 
 *******
 
