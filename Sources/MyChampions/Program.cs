@@ -1,17 +1,18 @@
 using Model;
 using StubLib;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Console_Champions;
+using EFDataManager;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IDataManager, StubData>();
+//builder.Services.AddScoped<IDataManager, IEFDataManager>();
 
 builder.Services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
 
