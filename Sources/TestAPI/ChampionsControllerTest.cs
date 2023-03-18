@@ -1,3 +1,4 @@
+using API_MyChampions;
 using DTO_MyChampions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,15 +24,22 @@ namespace TestAPI
         //[TestMethod]
         //public async Task TestGetChampion()
         //{
+        //    //Arrange
+        //    var pageRequest = new PageRequest();
+        //    var championDTO = new ChampionDTO
+        //    {
+        //        Name = "TestGet"
+        //    };
+
         //    //Act
-        //    var championsResult = await championsController.Get(null);
+        //    var championsResult = await championsController.Get(pageRequest, championDTO.Name);
 
         //    //Assert
         //    var objectResult = championsResult as OkObjectResult;
         //    Assert.IsNotNull(objectResult);
 
-        //    var champions = objectResult?.Value as IEnumerable<ChampionDTO>;
-        //    Assert.IsNotNull(objectResult);
+        //    var champions = objectResult.Value as IEnumerable<ChampionDTO>;    
+        //    Assert.IsNotNull(champions);
 
         //    Assert.AreEqual(champions.Count(), await stubData.ChampionsMgr.GetNbItems());
         //}
@@ -56,22 +64,20 @@ namespace TestAPI
             Assert.IsNotNull(champion);
         }
 
-        //[TestMethod]
-        //public async Task TestPutChampion()
-        //{
-        //    //Arrange
-        //    var championDTO = new ChampionDTO
-        //    {
-        //        Name = "TestPut"
-        //    };
+        [TestMethod]
+        public async Task TestPutChampion()
+        {
+            //Arange
+            string name = "Akali";
+            var newChamp = new ChampionDTO { Name = "TestPut" };
 
-        //    //Act
-        //    var championsResultPut = await championsController.Put("NameChanged",championDTO);
+            // Act
+            var result = await championsController.Put(name, newChamp);
 
-        //    //Assert
-        //    var champion = championsResultPut as ChampionDTO;
-        //    Assert.AreNotEqual("TestPut",championDTO.Name);
-        //}
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(OkResult));
+            Assert.IsNotNull(stubData.ChampionsMgr.GetItemsByName("TestPut", 0, await stubData.ChampionsMgr.GetNbItems()));
+        }
 
         [TestMethod]
         public async Task TestDeleteChampion()
