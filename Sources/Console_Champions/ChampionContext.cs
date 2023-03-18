@@ -13,7 +13,7 @@ namespace Console_Champions
     public class ChampionContext : DbContext
     {
 
-        //public ChampionContext(DbContextOptions options) : base(options) { }
+        public ChampionContext(DbContextOptions options) : base(options) { }
 
         //public ChampionContext() { }
 
@@ -34,6 +34,8 @@ namespace Console_Champions
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<SkinEntity>().Property<int>("ForeignChampion");
 

@@ -1,10 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Console_Champions;
+﻿using Console_Champions;
 using Model;
 using static System.Net.Mime.MediaTypeNames;
 using System.Collections.ObjectModel;
 using System.Reflection.PortableExecutable;
-using StubLib;
 using Console_Champions.Mapper;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,8 +13,10 @@ class Program
 
         Console.WriteLine("Program.cs -> Console_Champions");
 
+
+
         //Akali
-        using (ChampionContext context = new ChampionContext())
+        using (ChampionContext context = new ChampionContext(options: null))
         {
 
             ChampionEntity akali = new ChampionEntity { Id = 1, Name = "Akali", Class = ChampClassEntity.Assassin };
@@ -50,7 +50,7 @@ class Program
         }
 
         //Aatrox
-        using (ChampionContext context = new ChampionContext())
+        using (ChampionContext context = new ChampionContext(options: null))
         {
 
             ChampionEntity aatrox = new ChampionEntity { Id = 2, Name = "Aatrox", Class = ChampClassEntity.Fighter };
@@ -84,7 +84,7 @@ class Program
         }
 
         //Ahri
-        using (ChampionContext context = new ChampionContext())
+        using (ChampionContext context = new ChampionContext(options: null))
         {
 
             ChampionEntity ahri = new ChampionEntity { Id = 3, Name = "Ahri", Class = ChampClassEntity.Mage };
@@ -118,7 +118,7 @@ class Program
         }
 
         //Runes & RunePages
-        using (ChampionContext context = new ChampionContext())
+        using (ChampionContext context = new ChampionContext(options: null))
         {
             RunePageEntity runePage1 = new RunePageEntity { Id = 1, Name = "RunePage1" };
             RunePageEntity runePage2 = new RunePageEntity { Id = 2, Name = "RunePage2" };
