@@ -4,7 +4,7 @@
 
 ## Bonjour et bienvenue sur le dépôt du projet MyChampions ! 👋
 
-*******
+---
 
 Sommaire 
  1. [Accessibilité](#acces)
@@ -15,7 +15,7 @@ Sommaire
  6. [Conception](#conception)
  7. [Auteur](#auteur)
 
-*******
+---
 
 <div id='acces'/>
 
@@ -23,7 +23,8 @@ Sommaire
 
 > **Warning**: Le déploiement n'a pas encore été fait..
 
-*******
+---
+
 <div id='progression'/>
 
 🚧  __EN PROGRESSION__
@@ -48,7 +49,7 @@ Sommaire
 - __TP 7__ (_Consommation et Développement de services_) : Installations et mise à jour pour le client MAUI & avancement de l'`EFDataManager`      
 - __TP 7__ (_Entity Framework_) : Ajout de données dans `Program.cs` & Déploiement de la Database + Création de toutes les interfaces de `EFDataManager`
 
-*******
+---
 
 <div id='presentation'/>
 
@@ -77,13 +78,15 @@ MyChampions est une application référençant les différents personnages du c�
 - Personne 
     - 1 étudiant en BUT Informatique
 
-*******
+---
 
 <div id='architecture'/>
 
 # **Description Architecture Globale Application : MyChampions**
 
 ![](images_README/archi_generale_mychampions.png)
+
+---
 
 ## **API (Application Programming Interface)**
 
@@ -130,6 +133,12 @@ Le Dockerfile lié à cela va s'exécuter à chaque fois avec notre **CI** mise 
 
 ---
 
+## **L'API dans notre projet**
+
+![](images_README/archi_api_mychampions.png)
+
+---
+
 ## **EF (Entity Framework)**
 
 Souvent appelé EF Core, Entity Framework est un **ORM** (Object Relational Mapper) qui a pour but de simplifier la création de tables et des requêtes de base de données. 
@@ -162,7 +171,27 @@ Nous effectuons en `Entity Framework` les tests unitaire d'une façon particuli�
 
 Nous utilisons personnellement le Framework **xUnit** afin de tester pour chaque classe Entity l'ensemble des opérations **CRUD** auxquelles nous pensons : _Get_, _Add_, _Modify_ & _Delete_.
 
-*******
+---
+
+## **L'EF dans notre projet**
+
+![](images_README/archi_ef_mychampions.png)
+
+Le diagramme de classes montre que le modèle de données est composé de cinq entités principales : Champion, Skin, Skill, RunePage et Rune.   
+
+On retrouve trois types de liaison dans notre modèle :   
+- Les liaisons `One To One` : notamment entre les classes classiques et les énumérations leurs étant liées.
+- Les liaisons `One To Many` : que l'on retrouve par exemple entre la classe `Champion` et `Skin` puisqu'un champion peut avoir plusieurs skins alors qu'un skin ne peut appartenir qu'à un champion.
+- Les liaisons `Many To Many`: comme on le voit entre la classe `Rune` et la classe de `RunePage` avec une rune qui peut se trouver dans plusieurs pages de runes et une page de rune qui peut contenir plusieurs runes.    
+Il faut savoir que la classe `Rune` a aussi une relation de Dictionnaire avec la classe `RunePage` que je n'ai pas encore implémenté.   
+
+Nous avons besoin d'avoir toutes ces informations afin de pouvoir constituer les classes `Entity` qui nous permettront de constituer notre base de données.    
+
+Nous retrouvons aussi le `DbContext`, nommé `ChampionContext`, qui est défini pour gérer les entités Champion, Skin, Skill, RunePage et Rune. Les entités sont mappées à des tables de la base de données à l'aide de DbSet, et les relations entre les entités sont définies dans la méthode OnModelCreating.   
+
+Nous utilisons ensuite à partir de ce `Context` le principe de `Migrations` qui sont utilisées pour créer et mettre à jour la base de données.   
+
+---
 
 <div id='conception'/>
 
