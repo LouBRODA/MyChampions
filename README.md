@@ -12,6 +12,12 @@ Sommaire
  3. [Présentation du projet](#presentation)
  4. [Contenu](#contenu)
  5. [Architecture](#architecture)
+    1. [API](#api)
+    2. [L'API dans notre projet](#api_projet)
+    3. [EF](#ef)
+    4. [L'EF dans notre projet](#ef_projet)
+    5. [Lien entre EF et API](#link_ef_api)
+    6. [Lien entre l'API et l'application MAUI](#link_api_maui)
  6. [Conception](#conception)
  7. [Auteur](#auteur)
 
@@ -31,7 +37,9 @@ Pour obtenir le code du projet, il est possible de cloner la branche `master` da
 
 🚧  __EN PROGRESSION__
 
-📆  _Fin du projet prévue :_ Avril 2023
+📆  _Fin du projet prévue :_ 26 Mars 2023   
+
+Avancement :memo:  
 
 - __TP 1__ (_Consommation et Développement de services_) : Premier Contrôleur `Champion`  
 - __TP 1__ (_Entity Framework_) : Création d'une première classe `Champion`    
@@ -65,7 +73,7 @@ MyChampions est une application référençant les différents personnages du c�
 
 <div id='contenu'/>
 
-## Ressources
+## Ressources :package:
 
 - Temps
     - 23 Janvier au 26 Mars    
@@ -73,9 +81,9 @@ MyChampions est une application référençant les différents personnages du c�
     - Ordinateurs portables sous Windows   
     - Visual Studio 2022    
 - Langages utilisés
-    - C# ![]( 	https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-    - .NET ![](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
-    - SQLITE ![](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+    - ![](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+    - ![](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
+    - ![](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 
 - Personne 
     - 1 étudiant en BUT Informatique
@@ -84,13 +92,15 @@ MyChampions est une application référençant les différents personnages du c�
 
 <div id='architecture'/>
 
-# **Description Architecture Globale Application : MyChampions**
+# **Description Architecture Globale Application : MyChampions** :globe_with_meridians:
 
 ![](images_README/archi_generale_mychampions.png)
 
 ---
 
-## **API (Application Programming Interface)**
+<div id='api'/>
+
+## **API (Application Programming Interface)** :truck:
 
 Une API est un moyen de mettre à disposition des ressources (données).
 Dans ce projet, nous avons une API **RESTful** : URI (Uniform Resource Identifier) soit URL + encre
@@ -135,7 +145,9 @@ Le Dockerfile lié à cela va s'exécuter à chaque fois avec notre **CI** mise 
 
 ---
 
-## **L'API dans notre projet**
+<div id='api_projet'/>
+
+## **L'API dans notre projet** :truck:
 
 ![](images_README/archi_api_mychampions.png)
 
@@ -152,7 +164,9 @@ C'est ensuite à cette **API** que notre Application Mobile va faire appel pour 
 
 ---
 
-## **EF (Entity Framework)**
+<div id='ef'/>
+
+## **EF (Entity Framework)** :card_file_box:
 
 Souvent appelé EF Core, Entity Framework est un **ORM** (Object Relational Mapper) qui a pour but de simplifier la création de tables et des requêtes de base de données. 
 
@@ -186,7 +200,9 @@ Nous utilisons personnellement le Framework **xUnit** afin de tester pour chaque
 
 ---
 
-## **L'EF dans notre projet**
+<div id='ef_projet'/>
+
+## **L'EF dans notre projet** :card_file_box:
 
 ![](images_README/archi_ef_mychampions.png)
 
@@ -206,7 +222,9 @@ Nous utilisons ensuite à partir de ce `Context` le principe de `Migrations` qui
 
 ---
 
-## **Le lien entre EF et API : l'EFDataManager**
+<div id='link_ef_api'/>
+
+## **Le lien entre EF et API : l'EFDataManager** :thread:
 
 D'abord, lorsque l'on utilise Entity Framework dans notre projet, on créé des classes qui représentent les tables de notre base de données et les relations entre elles comme expliqué plus tôt. Entity Framework génère ensuite les requêtes SQL nécessaires pour interagir avec la base de données et récupérer les données.
 
@@ -220,7 +238,9 @@ Maintenant, il est aussi nécessaire de changer la portée de l'objet *IDataMana
 
 ---
 
-## **Le lien entre l'API et l'application MAUI**
+<div id='link_api_maui'/>
+
+## **Le lien entre l'API et l'application MAUI** :iphone:
 
 L'application mobile que nous utilisons fournie par le sujet étant fait à partir de la version 7 de Core donc supérieure à celle du code que nous développons : la 6.   
 Ceci a donc nécessité la création de deux solutions qui sont liées.   
@@ -229,8 +249,7 @@ Ceci a donc nécessité la création de deux solutions qui sont liées.
 
 <div id='conception'/>
 
-## Détails de conception
-
+## Détails de conception :building_construction:  
 
 ### Diagramme de classes du modèle
 ```mermaid
@@ -404,7 +423,7 @@ StubData --> "*" Skins
 
 <div id='auteur'/>
 
-## Auteur
+## Auteur :technologist:
 
 Étudiant 2ème Annnée - BUT Informatique - IUT Clermont Auvergne - 2022-2023   
 `BRODA Lou`
