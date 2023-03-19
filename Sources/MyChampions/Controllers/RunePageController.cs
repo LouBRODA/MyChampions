@@ -8,18 +8,18 @@ namespace API_MyChampions.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class RuneController : ControllerBase
+    public class RunePageController : ControllerBase
     {
         private IDataManager dataManager;
-        private readonly ILogger<RuneController> _logger;
+        private readonly ILogger<RunePageController> _logger;
 
-        public RuneController(IDataManager dataManager, ILogger<RuneController> logger)
+        public RunePageController(IDataManager dataManager, ILogger<RunePageController> logger)
         {
             this.dataManager = dataManager;
             _logger = logger;
         }
 
-        // GET: api/<RuneController>
+        // GET: api/<RunePageController>
         [ApiVersion("1.0")]
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -27,8 +27,8 @@ namespace API_MyChampions.Controllers
             _logger.LogInformation($"Method Get called");
             try
             {
-                var runes = (await dataManager.RunesMgr.GetItems(0, (await dataManager.RunesMgr.GetNbItems()))).Select(rune => rune?.ToDTO());
-                return Ok(runes);
+                var runePages = (await dataManager.RunePagesMgr.GetItems(0, (await dataManager.RunePagesMgr.GetNbItems()))).Select(runePage => runePage?.ToDTO());
+                return Ok(runePages);
             }
             catch (Exception exception)
             {
@@ -37,7 +37,7 @@ namespace API_MyChampions.Controllers
             }
         }
 
-        // GETBYNAME api/<RuneController>/5
+        // GETBYNAME api/<RunePageController>/5
         [ApiVersion("1.0")]
         [HttpGet("{name}")]
         public async Task<IActionResult> GetByName(string name)
@@ -45,9 +45,9 @@ namespace API_MyChampions.Controllers
             _logger.LogInformation($"Method GetByName called with {name}");
             try
             {
-                var runes = (await dataManager.RunesMgr.GetItems(0, (await dataManager.RunesMgr.GetNbItems()))).Select(rune => rune?.ToDTO());
-                var runeName = runes.Where(r => r.Name.Equals(name));
-                return Ok(runeName);
+                var runePages = (await dataManager.RunePagesMgr.GetItems(0, (await dataManager.RunePagesMgr.GetNbItems()))).Select(runePage => runePage?.ToDTO());
+                var runePageName = runePages.Where(rp => rp.Name.Equals(name));
+                return Ok(runePageName);
             }
             catch (Exception exception)
             {
@@ -56,46 +56,46 @@ namespace API_MyChampions.Controllers
             }
         }
 
-        // POST api/<RuneController>
+        // POST api/<RunePageController>
         [ApiVersion("1.0")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] RuneDTO rune)
+        public async Task<IActionResult> Post([FromBody] RunePageDTO runePage)
         {
-            _logger.LogInformation($"Method Post called with {rune}");
+            _logger.LogInformation($"Method Post called with {runePage}");
             try
             {
-                var runeModel = rune.ToModel();
-                var runeResult = await dataManager.RunesMgr.AddItem(runeModel);
-                var runeDto = runeResult.ToDTO();
-                return CreatedAtAction("Get", new { Id = 1 }, runeDto);
+                var runePageModel = runePage.ToModel();
+                var runePageResult = await dataManager.RunePagesMgr.AddItem(runePageModel);
+                var runePageDto = runePageResult.ToDTO();
+                return CreatedAtAction("Get", new { Id = 1 }, runePageDto);
             }
             catch (Exception exception)
             {
-                _logger.LogError($"ERR : Method Post with {rune} !");
+                _logger.LogError($"ERR : Method Post with {runePage} !");
                 return StatusCode(500, exception);
             }
         }
 
-        // PUT api/<RuneController>/5
+        // PUT api/<RunePageController>/5
         [ApiVersion("1.0")]
         [HttpPut("{name}")]
-        public async Task<IActionResult> Put(string name, [FromBody] RuneDTO rune)
+        public async Task<IActionResult> Put(string name, [FromBody] RunePageDTO runePage)
         {
-            _logger.LogInformation($"Method Put called with {name} and {rune}");
+            _logger.LogInformation($"Method Put called with {name} and {runePage}");
             try
             {
-                var runeDto = await dataManager.RunesMgr.GetItemsByName(name, 0, await dataManager.RunesMgr.GetNbItems());
-                await dataManager.RunesMgr.UpdateItem(runeDto.First(), rune.ToModel());
+                var runePageDto = await dataManager.RunePagesMgr.GetItemsByName(name, 0, await dataManager.RunePagesMgr.GetNbItems());
+                await dataManager.RunePagesMgr.UpdateItem(runePageDto.First(), runePage.ToModel());
                 return Ok();
             }
             catch (Exception exception)
             {
-                _logger.LogError($"ERR : Method Put with {name} and {rune} !");
+                _logger.LogError($"ERR : Method Put with {name} and {runePage} !");
                 return StatusCode(500, exception);
             }
         }
 
-        // DELETE api/<RuneController>/5
+        // DELETE api/<RunePageController>/5
         [ApiVersion("1.0")]
         [HttpDelete("{name}")]
         public async Task<IActionResult> Delete(string name)
@@ -103,9 +103,9 @@ namespace API_MyChampions.Controllers
             _logger.LogInformation($"Method Delete called with {name}");
             try
             {
-                var rune = (await dataManager.RunesMgr.GetItemsByName(name, 0, 1)).First();
-                dataManager.RunesMgr.DeleteItem(rune);
-                return Ok(rune.ToDTO());
+                var runePage = (await dataManager.RunePagesMgr.GetItemsByName(name, 0, 1)).First();
+                dataManager.RunePagesMgr.DeleteItem(runePage);
+                return Ok(runePage.ToDTO());
             }
             catch (Exception exception)
             {
