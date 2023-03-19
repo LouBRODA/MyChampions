@@ -21,7 +21,9 @@ Sommaire
 
 ### Profiter dès maintenant d'un accès anticipé à MyChampions
 
-> **Warning**: Le déploiement n'a pas encore été fait..
+> **Warning**: Le déploiement n'a pas encore été fait.   
+
+Pour obtenir le code du projet, il est possible de cloner la branche `master` dans Visual Studio 2022.   
 
 ---
 
@@ -137,6 +139,17 @@ Le Dockerfile lié à cela va s'exécuter à chaque fois avec notre **CI** mise 
 
 ![](images_README/archi_api_mychampions.png)
 
+Dans notre projet ASP.NET Core, l'API est un ensemble de routes, de contrôleurs et d'actions qui permettent aux utilisateurs de communiquer avec notre application à travers des demandes HTTP. En d'autres termes, une API définit les points d'entrée de l'application, les méthodes et les paramètres qui peuvent être utilisés pour interagir avec elle.   
+
+Ici, nous souhaitons interagir surtout avec nos 5 types d'éléments principaux : les champions, les skins, les skills, les runes & les pages de runes.   
+
+Nous avons donc pour chacun d'entre eux une classe `DTO` (Data Transfer Object). En somme, un DTO est un objet qui est utilisé pour transférer des données entre différentes parties d'une application. Il est conçu pour encapsuler un ensemble de données et les rendre disponibles à d'autres parties de l'application. L'utilisation de DTO peut présenter des avantages tels que la réduction de la quantité de données transférées, la simplification de la communication entre les différentes parties de l'application, l'amélioration des performances et la réduction de la complexité du code.   
+En plus de cela, nous utilisons des `Mapper` afin de pouvoir passer finalement entre les différentes formes que peut prendre un champion par exemple entre les différentes parties du projet (Champion, ChampionDTO, ChampionEntity...).   
+
+Nous pouvons grâce à cela définir notre `ChampionController` dans lequel sont définies toutes les actions liées aux champions et donc gérées par l'API. Ces actions dont nous avons parler précédemment vont être perfectionnées afin de répondre au mieux aux besoins de l'utilisateur. Par exemple, notre méthode `GET` permet également un *filtrage* par le nom et la *pagination* des données.   
+
+C'est ensuite à cette **API** que notre Application Mobile va faire appel pour pouvoir requêter les multiples objets qu'elle contient.   
+
 ---
 
 ## **EF (Entity Framework)**
@@ -190,6 +203,27 @@ Nous avons besoin d'avoir toutes ces informations afin de pouvoir constituer les
 Nous retrouvons aussi le `DbContext`, nommé `ChampionContext`, qui est défini pour gérer les entités Champion, Skin, Skill, RunePage et Rune. Les entités sont mappées à des tables de la base de données à l'aide de DbSet, et les relations entre les entités sont définies dans la méthode OnModelCreating.   
 
 Nous utilisons ensuite à partir de ce `Context` le principe de `Migrations` qui sont utilisées pour créer et mettre à jour la base de données.   
+
+---
+
+## **Le lien entre EF et API : l'EFDataManager**
+
+D'abord, lorsque l'on utilise Entity Framework dans notre projet, on créé des classes qui représentent les tables de notre base de données et les relations entre elles comme expliqué plus tôt. Entity Framework génère ensuite les requêtes SQL nécessaires pour interagir avec la base de données et récupérer les données.
+
+Avec ASP.NET Core, il est proposer d'utiliser *l'injection de dépendances* pour fournir des instances des classes générées par Entity Framework aux différentes parties de notre application. Cela permet de créer des instances de `ChampionContext` et de les utiliser pour interagir avec la base de données.
+
+Au début, nous avons utilisé un Singleton avec la paire **<IDataManager,StubData>**. IdataManager est une interface qui définit les méthodes serva,t à interagir avec les données, tandis que StubData est une implémentation de cette interface qui fournit des données simulées.
+
+Cependant, une fois passé à Entity Framework avec un `Context` terminé, nous avons pu utiliser une implémentation différente de l'interface **IDataManager** pour interagir avec la base de données. Nous avons donc utilisé une nouvelle implémentation de cette interface, appelée **IEFDataManager**, qui utilise `ChampionContext` pour interagir avec la base de données.
+
+Maintenant, il est aussi nécessaire de changer la portée de l'objet *IDataManager* de **Singleton** à **Scoped**. Cela signifie que chaque requête HTTP reçoit une nouvelle instance de l'objet *IDataManager*, qui est ensuite détruite lorsque la requête est terminée. Cela garantit que chaque requête dispose d'une instance séparée et que les données ne sont pas partagées entre les différentes requêtes.
+
+---
+
+## **Le lien entre l'API et l'application MAUI**
+
+L'application mobile que nous utilisons fournie par le sujet étant fait à partir de la version 7 de Core donc supérieure à celle du code que nous développons : la 6.   
+Ceci a donc nécessité la création de deux solutions qui sont liées.   
 
 ---
 
