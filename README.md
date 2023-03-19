@@ -57,7 +57,8 @@ Avancement :memo:
 - __TP 6__ (_Consommation et Développement de services_) : Ajout Logger Informations/Warning/Error dans Contrôleur + Début ajout Versioning + Reprise de `PUT` & `DELETE` avec tests + `GetSkinsByName` dans ChampionsController + début ajout EFDataManager    
 - __TP 6__ (_Entity Framework_) : All `ManyToMany` Finis + Ajout de tous les `Mappers` + Mise en place de tous les test   
 - __TP 7__ (_Consommation et Développement de services_) : Installations et mise à jour pour le client MAUI & avancement de l'`EFDataManager`      
-- __TP 7__ (_Entity Framework_) : Ajout de données dans `Program.cs` & Déploiement de la Database + Création de toutes les interfaces de `EFDataManager`
+- __TP 7__ (_Entity Framework_) : Ajout de données dans `Program.cs` & Déploiement de la Database + Création de toutes les interfaces de `EFDataManager`   
+- __Maison__ (_EF + Conso Services_) : Ajout des autres contrôleurs + rédaction documentation     
 
 ---
 
@@ -183,7 +184,8 @@ La classe de contexte représente une session avec la base de données sous-jace
 Une instance de la classe de contexte représente des modèles d'unité de travail et de référentiel dans lesquels elle peut combiner plusieurs modifications dans une seule transaction de base de données.  
 La classe de contexte est utilisée pour interroger ou enregistrer des données dans la base de données. Elle est également utilisée pour configurer les classes de domaine, les mappages liés à la base de données, modifier les paramètres de suivi, la mise en cache, les transactions...  
 
-Il faut savoir qu'il existe deux types de liaison principales entre deux classes :
+Il faut savoir qu'il existe trois types de liaison principales entre deux classes :
+- **One To One** : une entité d'un type est associée à une entité d'un autre type (_exemple : un champion appartient à un type_).   
 - **One To Many** : une entité d'un type est associé à plusieurs entités d'un autre type (_exemple : un champion possède plusieurs skins mais un skin ne peut appartenir qu'à un seul champion_).
 - **Many To Many** : les entités d'un type peuvent appartenir à plusieurs entités d'un autre type (_exemple : un champion à plusieurs skills et chaque skill peut appartenir à plusieurs champions_).
 
@@ -230,11 +232,11 @@ D'abord, lorsque l'on utilise Entity Framework dans notre projet, on créé des 
 
 Avec ASP.NET Core, il est proposer d'utiliser *l'injection de dépendances* pour fournir des instances des classes générées par Entity Framework aux différentes parties de notre application. Cela permet de créer des instances de `ChampionContext` et de les utiliser pour interagir avec la base de données.
 
-Au début, nous avons utilisé un Singleton avec la paire **<IDataManager,StubData>**. IdataManager est une interface qui définit les méthodes serva,t à interagir avec les données, tandis que StubData est une implémentation de cette interface qui fournit des données simulées.
+Au début, nous avons utilisé un **Singleton** (_on utilise toujours la même instance_) avec la paire **<IDataManager,StubData>**. IdataManager est une interface qui définit les méthodes serva,t à interagir avec les données, tandis que StubData est une implémentation de cette interface qui fournit des données simulées.
 
 Cependant, une fois passé à Entity Framework avec un `Context` terminé, nous avons pu utiliser une implémentation différente de l'interface **IDataManager** pour interagir avec la base de données. Nous avons donc utilisé une nouvelle implémentation de cette interface, appelée **IEFDataManager**, qui utilise `ChampionContext` pour interagir avec la base de données.
 
-Maintenant, il est aussi nécessaire de changer la portée de l'objet *IDataManager* de **Singleton** à **Scoped**. Cela signifie que chaque requête HTTP reçoit une nouvelle instance de l'objet *IDataManager*, qui est ensuite détruite lorsque la requête est terminée. Cela garantit que chaque requête dispose d'une instance séparée et que les données ne sont pas partagées entre les différentes requêtes.
+Maintenant, il est aussi nécessaire de changer la portée de l'objet *IDataManager* de **Singleton** à **Scoped** (_on instancie un nouveau Stub quand le manager est demandé_). Cela signifie que chaque requête HTTP reçoit une nouvelle instance de l'objet *IDataManager*, qui est ensuite détruite lorsque la requête est terminée. Cela garantit que chaque requête dispose d'une instance séparée et que les données ne sont pas partagées entre les différentes requêtes.
 
 ---
 
