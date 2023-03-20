@@ -22,28 +22,21 @@ namespace TestAPI
             skinController = new SkinController(new StubData(), new NullLogger<SkinController>());
         }
 
-        //[TestMethod]
-        //public async Task TestGetChampion()
-        //{
-        //    //Arrange
-        //    var pageRequest = new PageRequest();
-        //    var championDTO = new ChampionDTO
-        //    {
-        //        Name = "TestGet"
-        //    };
+        [TestMethod]
+        public async Task TestGetChampion()
+        {
+            //Act
+            var skinResult = await skinController.Get();
 
-        //    //Act
-        //    var championsResult = await championsController.Get(pageRequest, championDTO.Name);
+            //Assert
+            var objectResult = skinResult as OkObjectResult;
+            Assert.IsNotNull(objectResult);
 
-        //    //Assert
-        //    var objectResult = championsResult as OkObjectResult;
-        //    Assert.IsNotNull(objectResult);
+            var skins = objectResult?.Value as IEnumerable<SkinDTO>;
+            Assert.IsNotNull(objectResult);
 
-        //    var champions = objectResult.Value as IEnumerable<ChampionDTO>;    
-        //    Assert.IsNotNull(champions);
-
-        //    Assert.AreEqual(champions.Count(), await stubData.ChampionsMgr.GetNbItems());
-        //}
+            Assert.AreEqual(skins.Count(), await stubData.SkinsMgr.GetNbItems());
+        }
 
         //[TestMethod]
         //public async Task TestPostSkin()

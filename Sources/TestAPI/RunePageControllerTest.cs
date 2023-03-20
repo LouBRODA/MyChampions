@@ -22,28 +22,21 @@ namespace TestAPI
             runePageController = new RunePageController(new StubData(), new NullLogger<RunePageController>());
         }
 
-        //[TestMethod]
-        //public async Task TestGetChampion()
-        //{
-        //    //Arrange
-        //    var pageRequest = new PageRequest();
-        //    var championDTO = new ChampionDTO
-        //    {
-        //        Name = "TestGet"
-        //    };
+        [TestMethod]
+        public async Task TestGetRunePage()
+        {
+            ////Act
+            //var runePageResult = await runePageController.Get();
 
-        //    //Act
-        //    var championsResult = await championsController.Get(pageRequest, championDTO.Name);
+            ////Assert
+            //var objectResult = runePageResult as OkObjectResult;
+            //Assert.IsNotNull(objectResult);
 
-        //    //Assert
-        //    var objectResult = championsResult as OkObjectResult;
-        //    Assert.IsNotNull(objectResult);
+            //var runePages = objectResult?.Value as IEnumerable<RuneDTO>;
+            //Assert.IsNotNull(objectResult);
 
-        //    var champions = objectResult.Value as IEnumerable<ChampionDTO>;    
-        //    Assert.IsNotNull(champions);
-
-        //    Assert.AreEqual(champions.Count(), await stubData.ChampionsMgr.GetNbItems());
-        //}
+            //Assert.AreEqual(runePages.Count(), await stubData.RunePagesMgr.GetNbItems());
+        }
 
         [TestMethod]
         public async Task TestPostRunePage()
