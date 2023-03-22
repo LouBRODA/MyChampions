@@ -11,8 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IDataManager, StubData>();
-//builder.Services.AddScoped<IDataManager, IEFDataManager>();
+//builder.Services.AddSingleton<IDataManager, StubData>();
+builder.Services.AddDbContext<ChampionContext>();
+builder.Services.AddScoped<IDataManager, IEFDataManager>();
 
 builder.Services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
 

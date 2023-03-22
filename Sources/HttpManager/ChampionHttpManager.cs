@@ -1,6 +1,7 @@
 ﻿using DTO_MyChampions;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Net.Http.Json;
 
 namespace API_MyChampions.Client
 {
@@ -14,11 +15,11 @@ namespace API_MyChampions.Client
             httpClient.BaseAddress = new Uri("http://localhost:5010");
         }
 
-        /*public async Task<IActionResult> GetChampion()
+        public async Task<IActionResult> GetChampion()
         {
             var champions = await _httpClient.GetFromJsonAsync<IEnumerable<ChampionDTO>>("api/");
-            return champions;
-        }*/
+            return (IActionResult)champions;
+        }
  
     }
 }

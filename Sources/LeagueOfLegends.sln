@@ -32,6 +32,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEF", "TestEF\TestEF.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFDataManager", "EFDataManager\EFDataManager.csproj", "{2EE0BCF0-D7EE-4EA1-A9D2-28017CC54182}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LolApp", "..\..\Mobile_App\Sources\LolApp\LolApp.csproj", "{0C898A04-092A-49AA-BE65-8AE818A2AF50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpManager", "HttpManager\HttpManager.csproj", "{951761DF-CF1E-4BA4-8D0D-D8DC5CA6A4C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +82,15 @@ Global
 		{2EE0BCF0-D7EE-4EA1-A9D2-28017CC54182}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EE0BCF0-D7EE-4EA1-A9D2-28017CC54182}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EE0BCF0-D7EE-4EA1-A9D2-28017CC54182}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C898A04-092A-49AA-BE65-8AE818A2AF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C898A04-092A-49AA-BE65-8AE818A2AF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C898A04-092A-49AA-BE65-8AE818A2AF50}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0C898A04-092A-49AA-BE65-8AE818A2AF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C898A04-092A-49AA-BE65-8AE818A2AF50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{951761DF-CF1E-4BA4-8D0D-D8DC5CA6A4C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951761DF-CF1E-4BA4-8D0D-D8DC5CA6A4C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951761DF-CF1E-4BA4-8D0D-D8DC5CA6A4C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{951761DF-CF1E-4BA4-8D0D-D8DC5CA6A4C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

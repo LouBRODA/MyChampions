@@ -12,7 +12,14 @@ namespace EFDataManager
     public class IEFDataManager : IDataManager
     {
 
-        public IEFDataManager(ChampionContext context) => EFDataContext = context;
+        public IEFDataManager(ChampionContext context)
+        {
+            EFDataContext = context;
+            ChampionsMgr = new IChampionEFDataManager(this);
+            SkinsMgr = new ISkinEFDataManager(this);
+            RunesMgr = new IRuneEFDataManager(this);
+            RunePagesMgr = new IRunePageEFDataManager(this);
+        }
 
         public ChampionContext EFDataContext { get; }
 
