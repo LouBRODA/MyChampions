@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace EFDataManager
 {
-    public class IEFDataManager : IDataManager
+    public class GeneralEFDataManager : IDataManager
     {
 
-        public IEFDataManager(ChampionContext context)
+        public GeneralEFDataManager(ChampionContext context)
         {
             EFDataContext = context;
-            ChampionsMgr = new IChampionEFDataManager(this);
-            SkinsMgr = new ISkinEFDataManager(this);
-            RunesMgr = new IRuneEFDataManager(this);
-            RunePagesMgr = new IRunePageEFDataManager(this);
+            ChampionsMgr = new ChampionEFDataManager(this);
+            SkinsMgr = new SkinEFDataManager(this);
+            RunesMgr = new RuneEFDataManager(this);
+            RunePagesMgr = new RunePageEFDataManager(this);
         }
 
         public ChampionContext EFDataContext { get; }

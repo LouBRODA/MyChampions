@@ -20,5 +20,17 @@ namespace Console_Champions.Mapper
                 Image = champion.Image.Base64,
             };
         }
+
+        //public static Champion ToModel(this ChampionEntity champion)
+        //{
+        //    return new Champion
+        //    {
+        //        Name = champion.Name,
+        //        Class = (ChampClassEntity?)champion.Class,
+        //        Bio = champion.Bio,
+        //        Icon = champion.Icon,
+        //        Image = champion.Image.Base64,
+        //    };
+        //}
     }
 }

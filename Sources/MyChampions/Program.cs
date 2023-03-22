@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddSingleton<IDataManager, StubData>();
 builder.Services.AddDbContext<ChampionContext>();
-builder.Services.AddScoped<IDataManager, EFDataManager>();
+builder.Services.AddScoped<IDataManager, GeneralEFDataManager>();
 
 builder.Services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
 
