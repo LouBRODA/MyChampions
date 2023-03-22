@@ -11,9 +11,9 @@ namespace EFDataManager
 {
     public class IChampionEFDataManager : IChampionsManager
     {
-        private readonly IEFDataManager dataManager;
+        private readonly EFDataManager dataManager;
 
-        public IChampionEFDataManager(IEFDataManager dataManager)
+        public IChampionEFDataManager(EFDataManager dataManager)
             => this.dataManager = dataManager;
 
         public async Task<Champion?> AddItem(Champion? item)

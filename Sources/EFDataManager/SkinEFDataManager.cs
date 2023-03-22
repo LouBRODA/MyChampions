@@ -10,9 +10,9 @@ namespace EFDataManager
 {
     public class ISkinEFDataManager : ISkinsManager
     {
-        private readonly IEFDataManager dataManager;
+        private readonly EFDataManager dataManager;
 
-        public ISkinEFDataManager(IEFDataManager dataManager)
+        public ISkinEFDataManager(EFDataManager dataManager)
             => this.dataManager = dataManager;
 
         public async Task<Skin?> AddItem(Skin? item)

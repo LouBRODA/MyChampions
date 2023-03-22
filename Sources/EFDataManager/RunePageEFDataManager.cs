@@ -10,9 +10,9 @@ namespace EFDataManager
 {
     public class IRunePageEFDataManager : IRunePagesManager
     {
-        private readonly IEFDataManager dataManager;
+        private readonly EFDataManager dataManager;
 
-        public IRunePageEFDataManager(IEFDataManager dataManager)
+        public IRunePageEFDataManager(EFDataManager dataManager)
             => this.dataManager = dataManager;
 
         public async Task<RunePage?> AddItem(RunePage? item)
