@@ -59,6 +59,7 @@ Avancement :memo:
 - __TP 7__ (_Consommation et Développement de services_) : Installations et mise à jour pour le client MAUI & avancement de l'`EFDataManager`      
 - __TP 7__ (_Entity Framework_) : Ajout de données dans `Program.cs` & Déploiement de la Database + Création de toutes les interfaces de `EFDataManager`   
 - __Maison__ (_EF + Conso Services_) : Ajout des autres contrôleurs + rédaction documentation     
+- __TP 8__ (_Consommation et Développement de services_) : Mises en place des liens entre l'`EF` & l'`API` et entre l'`API` & l'`Application MAUI`       
 
 ---
 
@@ -156,8 +157,48 @@ Dans notre projet ASP.NET Core, l'API est un ensemble de routes, de contrôleurs
 
 Ici, nous souhaitons interagir surtout avec nos 5 types d'éléments principaux : les champions, les skins, les skills, les runes & les pages de runes.   
 
-Nous avons donc pour chacun d'entre eux une classe `DTO` (Data Transfer Object). En somme, un DTO est un objet qui est utilisé pour transférer des données entre différentes parties d'une application. Il est conçu pour encapsuler un ensemble de données et les rendre disponibles à d'autres parties de l'application. L'utilisation de DTO peut présenter des avantages tels que la réduction de la quantité de données transférées, la simplification de la communication entre les différentes parties de l'application, l'amélioration des performances et la réduction de la complexité du code.   
+Nous avons donc pour chacun d'entre eux une classe `DTO` (Data Transfer Object). En somme, un DTO est un objet qui est utilisé pour transférer des données entre différentes parties d'une application. Il est conçu pour encapsuler un ensemble de données et les rendre disponibles à d'autres parties de l'application. L'utilisation de DTO peut présenter des avantages tels que la réduction de la quantité de données transférées, la simplification de la communication entre les différentes parties de l'application, l'amélioration des 
+performances et la réduction de la complexité du code.   
+
+> *Exemple simple du principe d'un `DTO`* : Classe `ChampionDTO`
+
+```
+public class ChampionDTO
+{
+    public string Name { get; set; }
+    public string? Icon { get; set; }
+    public string? Bio { get; set; }
+}
+```
+
+Nous voyons donc que la classe `ChampionDTO` est très simple et ressemble grandement à la classe d'un `Champion`, elle nous permettra donc facilement de transférer les objets entre les différentes parties de l'application comme nous le verrons par la suite.   
+
 En plus de cela, nous utilisons des `Mapper` afin de pouvoir passer finalement entre les différentes formes que peut prendre un champion par exemple entre les différentes parties du projet (Champion, ChampionDTO, ChampionEntity...).   
+
+> *Exemple simple du principe d'un `Mapper`* : Classe `ChampionMapper`
+
+```
+public static class ChampionMapper
+{
+    public static ChampionDTO ToDTO(this Champion champion)
+    {
+        return new ChampionDTO()
+        {
+            Name = champion.Name,
+            Icon = champion.Icon,
+            Bio = champion.Bio,
+        };
+    }
+
+    public static Champion ToModel(this ChampionDTO championDTO)
+    {
+        return new Champion(championDTO.Name);
+    }
+}
+```
+
+Ci-dessus, nous voyons donc parfaitement l'intérêt du `Mapper` nous permettant de simplement passer d'un type à un autre (*ChampionDTO & Champion*). Les méthodes définies seront utilisables à de multiples endroits et nous permettront simplement d'obtenir le type de retour souhaité.   
+
 
 Nous pouvons grâce à cela définir notre `ChampionController` dans lequel sont définies toutes les actions liées aux champions et donc gérées par l'API. Ces actions dont nous avons parler précédemment vont être perfectionnées afin de répondre au mieux aux besoins de l'utilisateur. Par exemple, notre méthode `GET` permet également un *filtrage* par le nom et la *pagination* des données.   
 
@@ -213,14 +254,45 @@ Le diagramme de classes montre que le modèle de données est composé de cinq e
 On retrouve trois types de liaison dans notre modèle :   
 - Les liaisons `One To One` : notamment entre les classes classiques et les énumérations leurs étant liées.
 - Les liaisons `One To Many` : que l'on retrouve par exemple entre la classe `Champion` et `Skin` puisqu'un champion peut avoir plusieurs skins alors qu'un skin ne peut appartenir qu'à un champion.
+
+> *One To Many* : Fichier `ChampionContext.cs` - Méthode `OnModelCreating`  
+
+```
+modelBuilder.Entity<SkinEntity>()
+    .HasOne(s => s.Champion)
+    .WithMany(c => c.Skins)
+    .HasForeignKey("ForeignChampion");
+```
+
 - Les liaisons `Many To Many`: comme on le voit entre la classe `Rune` et la classe de `RunePage` avec une rune qui peut se trouver dans plusieurs pages de runes et une page de rune qui peut contenir plusieurs runes.    
+
+> *Many To Many* : Fichier `ChampionContext.cs` - Méthode `OnModelCreating`  
+
+```
+modelBuilder.Entity<RuneEntity>()
+    .HasMany(r => r.RunePages)
+    .WithMany(rp => rp.Runes);
+```
+
 Il faut savoir que la classe `Rune` a aussi une relation de Dictionnaire avec la classe `RunePage` que je n'ai pas encore implémenté.   
 
 Nous avons besoin d'avoir toutes ces informations afin de pouvoir constituer les classes `Entity` qui nous permettront de constituer notre base de données.    
 
-Nous retrouvons aussi le `DbContext`, nommé `ChampionContext`, qui est défini pour gérer les entités Champion, Skin, Skill, RunePage et Rune. Les entités sont mappées à des tables de la base de données à l'aide de DbSet, et les relations entre les entités sont définies dans la méthode OnModelCreating.   
+Nous retrouvons aussi le `DbContext`, nommé `ChampionContext`, qui est défini pour gérer les entités Champion, Skin, Skill, RunePage et Rune. Les entités sont mappées à des tables de la base de données à l'aide de DbSet, et les relations entre les entités sont définies dans la méthode *OnModelCreating*.   
 
-Nous utilisons ensuite à partir de ce `Context` le principe de `Migrations` qui sont utilisées pour créer et mettre à jour la base de données.   
+Nous utilisons ensuite à partir de ce `Context` le principe de `Migrations` qui sont utilisées pour créer et mettre à jour la base de données.    
+
+> *Comment appliquer une migration à ma base de données ?*
+
+Dans un premier temps, il faut supprimer, dans la base de données si elle existe, les tables existantes. Puis, il faut également supprimer les migrations existantes dans le fichier dédié.      
+Dans un second temps, dans la console du gestionnaire de package :
+
+```
+cd .\Console_Champions (dossier où se trouve la base de données)
+dotnet ef migrations remove --context ChampionContext (context de la base de données)
+dotnet ef migrations add MyMigration --context ChampionContext (context de la base de données)
+dotnet ef database update --context ChampionContext (context de la base de données)
+```
 
 ---
 
@@ -232,11 +304,42 @@ D'abord, lorsque l'on utilise Entity Framework dans notre projet, on créé des 
 
 Avec ASP.NET Core, il est proposer d'utiliser *l'injection de dépendances* pour fournir des instances des classes générées par Entity Framework aux différentes parties de notre application. Cela permet de créer des instances de `ChampionContext` et de les utiliser pour interagir avec la base de données.
 
-Au début, nous avons utilisé un **Singleton** (_on utilise toujours la même instance_) avec la paire **<IDataManager,StubData>**. IdataManager est une interface qui définit les méthodes serva,t à interagir avec les données, tandis que StubData est une implémentation de cette interface qui fournit des données simulées.
+Au début, nous avons utilisé un **Singleton** (_on utilise toujours la même instance_) avec la paire **<IDataManager,StubData>**. IdataManager est une interface qui définit les méthodes servant à interagir avec les données, tandis que StubData est une implémentation de cette interface qui fournit des données simulées.
 
 Cependant, une fois passé à Entity Framework avec un `Context` terminé, nous avons pu utiliser une implémentation différente de l'interface **IDataManager** pour interagir avec la base de données. Nous avons donc utilisé une nouvelle implémentation de cette interface, appelée **IEFDataManager**, qui utilise `ChampionContext` pour interagir avec la base de données.
 
 Maintenant, il est aussi nécessaire de changer la portée de l'objet *IDataManager* de **Singleton** à **Scoped** (_on instancie un nouveau Stub quand le manager est demandé_). Cela signifie que chaque requête HTTP reçoit une nouvelle instance de l'objet *IDataManager*, qui est ensuite détruite lorsque la requête est terminée. Cela garantit que chaque requête dispose d'une instance séparée et que les données ne sont pas partagées entre les différentes requêtes.
+
+> *Avant le changement* : fichier `Program.cs`   
+
+```
+builder.Services.AddSingleton<IDataManager, StubData>();
+
+builder.Services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
+
+var app = builder.Build();
+```
+
+> *Après le changement* : fichier `Program.cs`   
+
+```
+builder.Services.AddDbContext<ChampionContext>();
+builder.Services.AddScoped<IDataManager, GeneralEFDataManager>();
+
+builder.Services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
+
+var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetService<ChampionContext>();
+    context.Database.EnsureCreated();
+}
+```
+
+Nous remarquons en plus des changements annoncés que nous devons désormais également renseigner un `Context` pour faire fonctionner le `GeneralEFDataManager`. Nous renseignons donc d'abord dans la première ligne quel type de Context nous souhaitons ajouter avant de créer un nouveau `scope` (un conteneur qui contient les services dont une application a besoin pour fonctionner). Par la suite, nous utilisons la méthode `GetService<>()` pour récupérer une instance de `ChampionContext` à partir du `scope`.    
+
+Nous sommes donc désormais en possession d'un réel lien entre la partie `EF` et la partie `API` comme nous le souhaitions.   
 
 ---
 
@@ -245,7 +348,26 @@ Maintenant, il est aussi nécessaire de changer la portée de l'objet *IDataMana
 ## **Le lien entre l'API et l'application MAUI** :iphone:
 
 L'application mobile que nous utilisons fournie par le sujet étant fait à partir de la version 7 de Core donc supérieure à celle du code que nous développons : la 6.   
-Ceci a donc nécessité la création de deux solutions qui sont liées.   
+Ceci a donc nécessité la création de deux solutions qui sont liées.    
+
+L'utilisation de notre **API** au sein de notre solution **MAUI** a également demandé la création d'un nouveau `Manager` comme nous avions pu le faire plus tôt qui n'est d'autre que le `ChampionHttpManager`.   
+
+Cette classe définit dans un premier temps au sein de son constructeur un *httpClient* auquel on associe une *BaseAdress*.
+
+> *Définition du `ChampionHttpManager`* : fichier `ChampionHttpManager.cs`
+
+```
+public class ChampionHttpManager
+{
+    private readonly HttpClient _httpClient;
+
+    public ChampionHttpManager(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+        httpClient.BaseAddress = new Uri("http://localhost:5010");
+    }
+}
+```
 
 ---
 
