@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 //Première version avec le Stub Data
 //builder.Services.AddSingleton<IDataManager, StubData>();
 
-//Passage eb utilisant le GeneralEFDataManager
+//Passage en utilisant le GeneralEFDataManager
 builder.Services.AddDbContext<ChampionContext>();
 builder.Services.AddScoped<IDataManager, GeneralEFDataManager>();
 
