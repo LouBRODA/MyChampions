@@ -19,7 +19,7 @@ Sommaire
     5. [Lien entre EF et API](#link_ef_api)
     6. [Lien entre l'API et l'application MAUI](#link_api_maui)
  6. [Conception](#conception)
- 7. [Auteur](#auteur)
+ 7. [Auteur](#auteur) 
 
 ---
 
