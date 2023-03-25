@@ -36,7 +36,7 @@ namespace MyChampions.Controllers
 
             //_logger.LogInformation(_keyConfig.Value.Key);
 
-            IEnumerable<ChampionDTO> dtos = new List<ChampionDTO>();
+            IEnumerable<ChampionDTO?> dtos = new List<ChampionDTO>();
 
             if(pageRequest.Count > 50)
             {

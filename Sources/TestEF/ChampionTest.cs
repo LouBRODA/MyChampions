@@ -47,44 +47,6 @@ namespace TestEF
             }
         }
 
-        /*[Fact]
-        public void GetList_Champion_Test()
-        {
-            //connection must be opened to use In-memory database
-            var connection = new SqliteConnection("DataSource=:memory:");
-
-            var options = new DbContextOptionsBuilder<ChampionContext>()
-                .UseInMemoryDatabase(databaseName: "GetList_Champion_Test_database")
-                .Options;
-
-            //prepares the database with one instance of the context
-            using (var context = new ChampionContext(options))
-            {
-                context.Database.EnsureCreated();
-                var skin1 = new SkinEntity { Name = "Skin Akali 1" };
-                var skin2 = new SkinEntity { Name = "Skin Akali 2" };
-                var akali = new ChampionEntity { Skins = new List<SkinEntity> { skin1, skin2 } };
-
-                context.ChampionEntity.Add(akali);
-
-                context.SaveChanges();
-            }
-
-            //uses another instance of the context to do the tests
-            using (var context = new ChampionContext(options))
-            {
-                context.Database.EnsureCreated();
-
-                var skin1 = new SkinEntity { Name = "Skin Akali 1" };
-                var skin2 = new SkinEntity { Name = "Skin Akali 2" };
-
-                Assert.Equal(2, context.ChampionEntity.First().Skins.Count());
-                Assert.True(context.ChampionEntity.First().Skins.Contains(skin1));
-                Assert.True(context.ChampionEntity.First().Skins.Contains(skin2));
-            }
-
-        }*/
-
         [Fact]
         public void Add_Champion_Test()
         {
