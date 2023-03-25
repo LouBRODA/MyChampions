@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace EFDataManager
 {
-    public class IRuneEFDataManager : IRunesManager
+    public class RuneEFDataManager : IRunesManager
     {
-        private readonly IEFDataManager dataManager;
+        private readonly GeneralEFDataManager dataManager;
 
-        public IRuneEFDataManager(IEFDataManager dataManager)
+        public RuneEFDataManager(GeneralEFDataManager dataManager)
             => this.dataManager = dataManager;
 
         public async Task<Model.Rune?> AddItem(Model.Rune? item)

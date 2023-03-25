@@ -20,5 +20,10 @@ namespace Console_Champions.Mapper
                 Image = champion.Image.Base64,
             };
         }
+
+        public static Champion ToModel(this ChampionEntity champion)
+        {
+            return new Champion(champion.Name);
+        }
     }
 }

@@ -9,11 +9,11 @@ using System.Xml.Linq;
 
 namespace EFDataManager
 {
-    public class IChampionEFDataManager : IChampionsManager
+    public class ChampionEFDataManager : IChampionsManager
     {
-        private readonly IEFDataManager dataManager;
+        private readonly GeneralEFDataManager dataManager;
 
-        public IChampionEFDataManager(IEFDataManager dataManager)
+        public ChampionEFDataManager(GeneralEFDataManager dataManager)
             => this.dataManager = dataManager;
 
         public async Task<Champion?> AddItem(Champion? item)
@@ -30,7 +30,10 @@ namespace EFDataManager
 
         public Task<IEnumerable<Champion?>> GetItems(int index, int count, string? orderingPropertyName = null, bool descending = false)
         {
-            throw new NotImplementedException();
+            return (Task<IEnumerable<Champion?>>)dataManager.EFDataContext.ChampionEntity.GetItemsWithFilterAndOrdering(
+                c => true,
+                index, count,
+                orderingPropertyName, descending).Select(c => c.ToModel());
         }
 
         public Task<IEnumerable<Champion?>> GetItemsByCharacteristic(string charName, int index, int count, string? orderingPropertyName = null, bool descending = false)

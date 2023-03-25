@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace EFDataManager
 {
-    public class ISkinEFDataManager : ISkinsManager
+    public class SkinEFDataManager : ISkinsManager
     {
-        private readonly IEFDataManager dataManager;
+        private readonly GeneralEFDataManager dataManager;
 
-        public ISkinEFDataManager(IEFDataManager dataManager)
+        public SkinEFDataManager(GeneralEFDataManager dataManager)
             => this.dataManager = dataManager;
 
         public async Task<Skin?> AddItem(Skin? item)

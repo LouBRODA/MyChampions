@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace EFDataManager
 {
-    public class IRunePageEFDataManager : IRunePagesManager
+    public class RunePageEFDataManager : IRunePagesManager
     {
-        private readonly IEFDataManager dataManager;
+        private readonly GeneralEFDataManager dataManager;
 
-        public IRunePageEFDataManager(IEFDataManager dataManager)
+        public RunePageEFDataManager(GeneralEFDataManager dataManager)
             => this.dataManager = dataManager;
 
         public async Task<RunePage?> AddItem(RunePage? item)
