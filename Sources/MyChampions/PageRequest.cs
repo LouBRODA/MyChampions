@@ -1,4 +1,6 @@
-﻿namespace API_MyChampions
+﻿//Class used to Pagination : factorize Count and Index (pages)
+
+namespace API_MyChampions
 {
     public class PageRequest
     {

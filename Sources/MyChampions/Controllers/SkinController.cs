@@ -3,6 +3,8 @@ using DTO_MyChampions;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
+//SkinController
+
 namespace API_MyChampions.Controllers
 {
     [ApiVersion("1.0")]

@@ -7,6 +7,8 @@ using MyChampions.Controllers;
 using StubLib;
 using System.Xml.Linq;
 
+//Tests for ChampionsController 
+
 namespace TestAPI
 {
     [TestClass]

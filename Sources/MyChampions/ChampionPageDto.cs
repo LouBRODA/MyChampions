@@ -1,5 +1,7 @@
 ﻿using DTO_MyChampions;
 
+//Class used to Pagination
+
 namespace API_MyChampions
 {
     public class ChampionPageDto

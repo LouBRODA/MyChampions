@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//SkillEntity class with all attributes placed in the table
+
 namespace Console_Champions
 {
     public class SkillEntity

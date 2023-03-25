@@ -8,6 +8,8 @@ using MyChampions.Controllers;
 using StubLib;
 using System.Xml.Linq;
 
+//Tests for RuneController 
+
 namespace TestAPI
 {
     [TestClass]

@@ -8,6 +8,8 @@ using MyChampions.Controllers;
 using StubLib;
 using System.Xml.Linq;
 
+//Tests for RunePageController 
+
 namespace TestAPI
 {
     [TestClass]
@@ -25,17 +27,17 @@ namespace TestAPI
         [TestMethod]
         public async Task TestGetRunePage()
         {
-            ////Act
-            //var runePageResult = await runePageController.Get();
+            //Act
+            var runePageResult = await runePageController.Get();
 
-            ////Assert
-            //var objectResult = runePageResult as OkObjectResult;
-            //Assert.IsNotNull(objectResult);
+            //Assert
+            var objectResult = runePageResult as OkObjectResult;
+            Assert.IsNotNull(objectResult);
 
-            //var runePages = objectResult?.Value as IEnumerable<RuneDTO>;
-            //Assert.IsNotNull(objectResult);
+            var runePages = objectResult?.Value as IEnumerable<RunePageDTO>;
+            Assert.IsNotNull(objectResult);
 
-            //Assert.AreEqual(runePages.Count(), await stubData.RunePagesMgr.GetNbItems());
+            Assert.AreEqual(runePages.Count(), await stubData.RunePagesMgr.GetNbItems());
         }
 
         [TestMethod]

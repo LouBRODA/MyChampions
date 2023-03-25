@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Class to initialize all types of EFDataManager (Champions, Skins, Runes, RunePages)
+
 namespace EFDataManager
 {
     public class GeneralEFDataManager : IDataManager

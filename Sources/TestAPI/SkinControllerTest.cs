@@ -8,6 +8,8 @@ using MyChampions.Controllers;
 using StubLib;
 using System.Xml.Linq;
 
+//Tests for SkinController 
+
 namespace TestAPI
 {
     [TestClass]
@@ -39,24 +41,24 @@ namespace TestAPI
         }
 
         //[TestMethod]
-        //public async Task TestPostSkin()
-        //{
-        //    //Arrange
-        //    var skinDTO = new SkinDTO
-        //    {
-        //        Name = "TestPost"
-        //    };
+        public async Task TestPostSkin()
+        {
+            ////Arrange
+            //var skinDTO = new SkinDTO
+            //{
+            //    Name = "TestPost"
+            //};
 
-        //    //Act
-        //    var skinResult = await skinController.Post(skinDTO);
+            ////Act
+            //var skinResult = await skinController.Post(skinDTO);
 
-        //    //Assert
-        //    var createdResult = skinResult as CreatedAtActionResult;
-        //    Assert.IsNotNull(createdResult);
+            ////Assert
+            //var createdResult = skinResult as CreatedAtActionResult;
+            //Assert.IsNotNull(createdResult);
 
-        //    var skin = createdResult?.Value as SkinDTO;
-        //    Assert.IsNotNull(skin);
-        //}
+            //var skin = createdResult?.Value as SkinDTO;
+            //Assert.IsNotNull(skin);
+        }
 
         [TestMethod]
         public async Task TestPutSkin()

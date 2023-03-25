@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+//Class ChampionEFDataManager extends IChampionsManager redefining all methods of Manager
+
 namespace EFDataManager
 {
     public class ChampionEFDataManager : IChampionsManager

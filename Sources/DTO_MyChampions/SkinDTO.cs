@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//SkinDTO class with all attributes linked
+
 namespace DTO_MyChampions
 {
     public class SkinDTO

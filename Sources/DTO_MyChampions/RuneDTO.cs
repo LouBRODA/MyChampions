@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//RuneDTO class with all attributes linked
+
 namespace DTO_MyChampions
 {
     public class RuneDTO

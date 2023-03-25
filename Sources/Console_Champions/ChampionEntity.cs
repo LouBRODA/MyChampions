@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+//ChampionEntity class with all attributes placed in the table
+
 namespace Console_Champions
 {
     public class ChampionEntity

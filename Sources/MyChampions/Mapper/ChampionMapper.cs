@@ -2,6 +2,8 @@
 using DTO_MyChampions;
 using System.Xml.Linq;
 
+//Mapper used to switch between Champion types (DTO & Model)
+
 namespace API_MyChampions.Mapper
 {
     public static class ChampionMapper

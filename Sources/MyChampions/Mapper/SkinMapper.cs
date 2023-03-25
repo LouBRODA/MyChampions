@@ -1,6 +1,8 @@
 ﻿using DTO_MyChampions;
 using Model;
 
+//Mapper used to switch between Skin types (DTO & Model)
+
 namespace API_MyChampions.Mapper
 {
     public static class SkinMapper

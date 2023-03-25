@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Class RuneEFDataManager extends IRunesManager redefining all methods of Manager
+
 namespace EFDataManager
 {
     public class RuneEFDataManager : IRunesManager

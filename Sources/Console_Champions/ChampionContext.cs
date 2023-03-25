@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//ChampionContext (used with Program.cs) to define Database
+
 namespace Console_Champions
 {
 

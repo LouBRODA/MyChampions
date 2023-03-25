@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Class Extension to defines method used in EFDataManager (GET...) like in the Model
+
 namespace EFDataManager
 {
     public static class Extension

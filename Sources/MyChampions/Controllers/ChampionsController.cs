@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using static StubLib.StubData;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+//ChampionsController
 
 namespace MyChampions.Controllers
 {

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Class SkinEFDataManager extends ISkinsManager redefining all methods of Manager
+
 namespace EFDataManager
 {
     public class SkinEFDataManager : ISkinsManager

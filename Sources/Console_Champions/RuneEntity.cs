@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//RuneEntity class with all attributes placed in the table
+
 namespace Console_Champions
 {
     public  class RuneEntity
