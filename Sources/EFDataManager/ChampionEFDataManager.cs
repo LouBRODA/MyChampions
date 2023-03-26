@@ -45,27 +45,42 @@ namespace EFDataManager
 
         public Task<IEnumerable<Champion?>> GetItemsByClass(ChampionClass championClass, int index, int count, string? orderingPropertyName = null, bool descending = false)
         {
-            throw new NotImplementedException();
+            return (Task<IEnumerable<Champion?>>)dataManager.EFDataContext.ChampionEntity.GetItemsWithFilterAndOrdering(
+                    c => c.Class.Equals(championClass),
+                    index, count,
+                    orderingPropertyName, descending).Select(c => c.ToModel());
         }
 
         public Task<IEnumerable<Champion?>> GetItemsByName(string substring, int index, int count, string? orderingPropertyName = null, bool descending = false)
         {
-            throw new NotImplementedException();
+            return (Task<IEnumerable<Champion?>>)dataManager.EFDataContext.ChampionEntity.GetItemsWithFilterAndOrdering(
+                    c => c.Name.Contains(substring),
+                    index, count,
+                    orderingPropertyName, descending).Select(c => c.ToModel());
         }
 
         public Task<IEnumerable<Champion?>> GetItemsByRunePage(RunePage? runePage, int index, int count, string? orderingPropertyName = null, bool descending = false)
         {
-            throw new NotImplementedException();
+            return (Task<IEnumerable<Champion?>>)dataManager.EFDataContext.ChampionEntity.GetItemsWithFilterAndOrdering(
+                    c => c.RunePages.Any(rp => rp.Equals(runePage.ToEntity())),
+                    index, count,
+                    orderingPropertyName, descending).Select(c => c.ToModel());
         }
 
         public Task<IEnumerable<Champion?>> GetItemsBySkill(Skill? skill, int index, int count, string? orderingPropertyName = null, bool descending = false)
         {
-            throw new NotImplementedException();
+            return (Task<IEnumerable<Champion?>>)dataManager.EFDataContext.ChampionEntity.GetItemsWithFilterAndOrdering(
+                    c => skill != null && c.Skills.Any(s => s.Name.Equals(skill.Name)),
+                    index, count,
+                    orderingPropertyName, descending).Select(c => c.ToModel());
         }
 
         public Task<IEnumerable<Champion?>> GetItemsBySkill(string skill, int index, int count, string? orderingPropertyName = null, bool descending = false)
         {
-            throw new NotImplementedException();
+            return (Task<IEnumerable<Champion?>>)dataManager.EFDataContext.ChampionEntity.GetItemsWithFilterAndOrdering(
+                    c => skill != null && c.Skills.Any(s => s.Name.Equals(skill)),
+                    index, count,
+                    orderingPropertyName, descending).Select(c => c.ToModel());
         }
 
         public async Task<int> GetNbItems()
@@ -76,7 +91,6 @@ namespace EFDataManager
         public async Task<int> GetNbItemsByCharacteristic(string charName)
         {
             throw new NotImplementedException();
-            //return dataManager.EFDataContext.ChampionEntity.Where(c => c.Name.Equals(charName).Count();
         }
 
         public async Task<int> GetNbItemsByClass(ChampionClass championClass)
