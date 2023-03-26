@@ -96,14 +96,21 @@ MyChampions est une application référençant les différents personnages du c�
 
 - Temps
     - 23 Janvier au 26 Mars    
+
 - Matériel
+
     - Ordinateurs portables sous Windows   
     - Visual Studio 2022    
+
 - Langages utilisés
     - ![](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
     - ![](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
     - ![](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 
+- Outils mis en place
+    En plus du dépôt Code#0, vous pouvez aussi retrouver l'utilisation de SonarQube :    
+    > https://codefirst.iut.uca.fr/sonar/dashboard?id=MyChampions
+    
 - Personne 
     - 1 étudiant en BUT Informatique
 
