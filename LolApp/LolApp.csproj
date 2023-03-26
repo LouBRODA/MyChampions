@@ -82,10 +82,10 @@
 	  <MauiImage Include="Resources\Images\rp.png" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="../Model/Model.csproj" />
-	  <ProjectReference Include="../Shared/Shared.csproj" />
-	  <ProjectReference Include="../StubLib/StubLib.csproj" />
-	  <ProjectReference Include="../ViewModels/ViewModels.csproj" />
+	  <ProjectReference Include="..\Model\Model.csproj" />
+	  <ProjectReference Include="..\Shared\Shared.csproj" />
+	  <ProjectReference Include="..\StubLib\StubLib.csproj" />
+	  <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
