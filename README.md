@@ -27,9 +27,28 @@ Sommaire
 
 ### Profiter dès maintenant d'un accès anticipé à MyChampions
 
-> **Warning**: Le déploiement n'a pas encore été fait.   
+Pour obtenir le code du projet, il est possible de cloner la branche `maui` (qui est la plus récente) dans Visual Studio 2022.    
 
-Pour obtenir le code du projet, il est possible de cloner la branche `master` dans Visual Studio 2022.   
+![](images_README/Clone_Depot_CodeFirst.png)
+
+> Pour lancer l'API : Sélectionner comme projet de démarrage **API_MyChampions**
+> Pour lancer la solution MAUI : Sélectionner comme projet de démarrage **LolApp (LolApp\LolApp)**
+
+Il est possible de choisir plusieurs solutions de démarrage de la manière suivante :
+```
+- Clic droit sur la solution
+- Configurer des projets de start-up...
+- Cocher *Plusieurs projets de démarrages*
+- Choisir les deux solutions nous intéressant
+```
+
+> :warning:	Quelques erreurs persistent !
+
+Les liaisons ne sont pas encore toutes fonctionnelles. Tout est implémenté pour que cela fonctionne mais les liaisons créent parfois quelques problèmes.
+- Pour l'API notamment, la solution sans la partie EF est fonctionnelle. Il est possible de la commentée pour tester l'autre manière avec le *Scoped* même si quelques erreurs sont encore présentes dans celle-ci.   
+- Si la CI échoue quelques fois, c'est à cause de la solution MAUI  
+
+Je n'ai pas réussi à rendre fonctionelle tous les liaisons surtout avec l'API à cause de quelques erreurs bloquantes et du manque de temps. Néanmoins, j'ai codé toutes les méthodes et ce qui pourrait être nécessaire pour que cela soit fonctionnel.   
 
 ---
 
@@ -79,14 +98,21 @@ MyChampions est une application référençant les différents personnages du c�
 
 - Temps
     - 23 Janvier au 26 Mars    
+
 - Matériel
+
     - Ordinateurs portables sous Windows   
     - Visual Studio 2022    
+
 - Langages utilisés
     - ![](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
     - ![](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
     - ![](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 
+- Outils mis en place
+    En plus du dépôt Code#0, vous pouvez aussi retrouver l'utilisation de SonarQube :    
+    > https://codefirst.iut.uca.fr/sonar/dashboard?id=MyChampions
+    
 - Personne 
     - 1 étudiant en BUT Informatique
 
@@ -368,6 +394,8 @@ public class ChampionHttpManager
     }
 }
 ```
+
+Nous allons également devoir implémenter dans le fichier `MauiProgram.cs` le nouveau type *HttpChampionManager*
 
 ---
 
