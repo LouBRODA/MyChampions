@@ -8,10 +8,12 @@ trigger:
 
 steps:
   - name: build
-    image: mcr.microsoft.com/dotnet/sdk:7.0
+    image: mcr.microsoft.com/dotnet/sdk:6.0
     volumes:
       - name: docs
         path: /docs
+    exclude:
+      - Sources/LolApp
     commands:
       - cd Sources/
       - dotnet workload restore
