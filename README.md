@@ -27,9 +27,23 @@ Sommaire
 
 ### Profiter dès maintenant d'un accès anticipé à MyChampions
 
-> **Warning**: Le déploiement n'a pas encore été fait.   
+Pour obtenir le code du projet, il est possible de cloner la branche `master` dans Visual Studio 2022.    
 
-Pour obtenir le code du projet, il est possible de cloner la branche `master` dans Visual Studio 2022.   
+> Pour lancer l'API : Sélectionner comme projet de démarrage **API_MyChampions**
+> Pour lancer la solution MAUI : Sélectionner comme projet de démarrage **LolApp (LolApp\LolApp)**
+
+Il est possible de choisir plusieurs solutions de démarrage de la manière suivante :
+```
+- Clic droit sur la solution
+- Configurer des projets de start-up...
+- Cocher *Plusieurs projets de démarrages*
+- Choisir les deux solutions nous intéressant
+```
+
+> :warning:	Quelques erreurs persistent !
+
+Les liaisons ne sont pas encore toutes fonctionnelles. Tout est implémenté pour que cela fonctionne mais les liaisons créent parfois quelques problèmes.
+- Pour l'API notamment, la solution sans la partie EF est fonctionnelle et commentée. Il est possible de décommentée l'autre manière avec le *Scoped* pour tester les requêtes.   
 
 ---
 
@@ -368,6 +382,8 @@ public class ChampionHttpManager
     }
 }
 ```
+
+Nous allons également devoir implémenter dans le fichier `MauiProgram.cs` le nouveau type *HttpChampionManager*
 
 ---
 

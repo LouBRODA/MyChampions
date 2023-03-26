@@ -13,9 +13,8 @@ steps:
       - name: docs
         path: /docs
     commands:
-      - cd Sources/LolApp/
+      - cd Sources/
       - dotnet workload restore
-      - cd ..
       - dotnet restore LeagueOfLegends.sln
       - dotnet build LeagueOfLegends.sln -c Release --no-restore
       - dotnet publish LeagueOfLegends.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
