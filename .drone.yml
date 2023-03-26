@@ -13,7 +13,7 @@ steps:
       - name: docs
         path: /docs
     commands:
-      - cd Sources/LolApp/
+      - cd Sources/
       - dotnet workload restore
       - cd ..
       - dotnet restore LeagueOfLegends.sln
