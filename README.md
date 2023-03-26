@@ -27,7 +27,7 @@ Sommaire
 
 ### Profiter dès maintenant d'un accès anticipé à MyChampions
 
-Pour obtenir le code du projet, il est possible de cloner la branche `master` dans Visual Studio 2022.    
+Pour obtenir le code du projet, il est possible de cloner la branche `maui` (qui est la plus récente) dans Visual Studio 2022.    
 
 > Pour lancer l'API : Sélectionner comme projet de démarrage **API_MyChampions**
 > Pour lancer la solution MAUI : Sélectionner comme projet de démarrage **LolApp (LolApp\LolApp)**
