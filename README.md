@@ -43,7 +43,7 @@ Il est possible de choisir plusieurs solutions de démarrage de la manière suiv
 > :warning:	Quelques erreurs persistent !
 
 Les liaisons ne sont pas encore toutes fonctionnelles. Tout est implémenté pour que cela fonctionne mais les liaisons créent parfois quelques problèmes.
-- Pour l'API notamment, la solution sans la partie EF est fonctionnelle et commentée. Il est possible de commentée l'autre manière avec le *Scoped* pour tester les requêtes.   
+- Pour l'API notamment, la solution sans la partie EF est fonctionnelle et commentée. Il est possible de décommentée l'autre manière avec le *Scoped* pour tester les requêtes.   
 
 ---
 
