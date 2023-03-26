@@ -40,6 +40,11 @@ Il est possible de choisir plusieurs solutions de démarrage de la manière suiv
 - Choisir les deux solutions nous intéressant
 ```
 
+> :warning:	Quelques erreurs persistent !
+
+Les liaisons ne sont pas encore toutes fonctionnelles. Tout est implémenté pour que cela fonctionne mais les liaisons créent parfois quelques problèmes.
+- Pour l'API notamment, la solution sans la partie EF est fonctionnelle et commentée. Il est possible de commentée l'autre manière avec le *Scoped* pour tester les requêtes.   
+
 ---
 
 <div id='progression'/>
@@ -377,6 +382,8 @@ public class ChampionHttpManager
     }
 }
 ```
+
+Nous allons également devoir implémenter dans le fichier `MauiProgram.cs` le nouveau type *HttpChampionManager*
 
 ---
 
