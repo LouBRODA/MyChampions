@@ -43,7 +43,10 @@ Il est possible de choisir plusieurs solutions de démarrage de la manière suiv
 > :warning:	Quelques erreurs persistent !
 
 Les liaisons ne sont pas encore toutes fonctionnelles. Tout est implémenté pour que cela fonctionne mais les liaisons créent parfois quelques problèmes.
-- Pour l'API notamment, la solution sans la partie EF est fonctionnelle et commentée. Il est possible de décommentée l'autre manière avec le *Scoped* pour tester les requêtes.   
+- Pour l'API notamment, la solution sans la partie EF est fonctionnelle. Il est possible de la commentée pour tester l'autre manière avec le *Scoped* même si quelques erreurs sont encore présentes dans celle-ci.   
+- Si la CI échoue quelques fois, c'est à cause de la solution MAUI  
+
+Je n'ai pas réussi à rendre fonctionelle tous les liaisons surtout avec l'API à cause de quelques erreurs bloquantes et du manque de temps. Néanmoins, j'ai codé toutes les méthodes et ce qui pourrait être nécessaire pour que cela soit fonctionnel.   
 
 ---
 
