@@ -16,8 +16,8 @@ steps:
       - cd Sources/
       - dotnet workload restore
       - dotnet restore LeagueOfLegends.sln
-      - dotnet build LeagueOfLegends.sln -c Release --no-restore
-      - dotnet publish LeagueOfLegends.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release
+      - dotnet build LeagueOfLegends.sln -c Release --no-restore -not LolApp/
+      - dotnet publish LeagueOfLegends.sln -c Release --no-restore -o CI_PROJECT_DIR/build/release -not LolApp/
 
   - name: tests
     image: mcr.microsoft.com/dotnet/sdk:6.0
@@ -89,9 +89,3 @@ steps:
 volumes:
 - name: docs
   temp: {}
-
-path:
-  include:
-    - ./
-  exclude:
-    - LolApp/
